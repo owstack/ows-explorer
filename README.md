@@ -2,6 +2,10 @@
 
 A Bitcoin blockchain explorer web application service for [Btccore Node](https://github.com/owstack/btccore-node) using the [Explorer API](https://github.com/owstack/explorer-api).
 
+## Attribution
+
+This repository was created by copy forking [insight commit e94154b](https://github.com/bitpay/insight/commit/e94154ba4bb3e89e6c92023a0e4472ea33e4b266).
+
 ## Quick Start
 
 Please see the guide at [https://btccore.io/guides/full-node](https://btccore.io/guides/full-node) for information about getting a block explorer running. This is only the front-end component of the block explorer, and is packaged together with all of the necessary components in [Btccore](https://github.com/owstack/btccore).
