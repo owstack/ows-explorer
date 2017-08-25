@@ -14,7 +14,10 @@ var ExplorerUI = function(options) {
   this.routePrefix = pkg.explorerConfig.routePrefix;
 };
 
-ExplorerUI.dependencies = ['explorer-api'];
+ExplorerUI.dependencies = [
+  'bcccore-explorer-api',
+  'btccore-explorer-api'
+];
 
 inherits(ExplorerUI, BaseService);
 
