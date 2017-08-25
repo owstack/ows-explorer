@@ -16,6 +16,7 @@
     "btccore",
     "front-end"
   ],
+  "bcccoreNode": "btccore-node",
   "btccoreNode": "btccore-node",
   "explorerConfig": {
     "apiPrefix": "explorer-api",
