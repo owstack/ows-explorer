@@ -86,7 +86,10 @@
           </tr>
           <tr>
             <td translate>Subversion</td>
-            <td class="text-right">{{info.subversion}}</td>
+            <td class="text-right">
+              {{info.subversion.split('/')[1].split('(')[0]}}<br>
+              ({{info.subversion.split('(')[1].split(')')[0]}})
+            </td>
           </tr>
           <tr>
             <td translate>Protocol version</td>
