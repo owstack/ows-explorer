@@ -1,7 +1,7 @@
 {
   "name": "ows-explorer",
   "description": "An open-source frontend for the Explorer API. The Explorer API provides you with a convenient, powerful and simple way to query and broadcast data on the bitcoin network and build your own services with it.",
-  "version": "5.0.0-beta.1",
+  "version": "0.0.1",
   "repository": "git://github.com/owstack/ows-explorer.git",
   "bugs": {
     "url": "https://github.com/owstack/ows-explorer/issues"
