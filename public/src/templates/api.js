@@ -4,6 +4,6 @@ angular.module('explorer.api')
   .factory('Api',
     function() {
       return {
-        apiPrefix: '/INSIGHT_API_PREFIX'
+        apiPrefix: '/EXPLORER_API_PREFIX'
       }
     });

@@ -22,7 +22,7 @@ module.exports = function(grunt) {
         options: {
           patterns: [
             {
-              match: 'INSIGHT_API_PREFIX',
+              match: 'EXPLORER_API_PREFIX',
               replacement: '<%= pkg.explorerConfig.apiPrefix %>'
             }
           ],
