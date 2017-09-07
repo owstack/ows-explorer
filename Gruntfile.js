@@ -17,22 +17,6 @@ module.exports = function(grunt) {
   // Project Configuration
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    replace: {
-      dist: {
-        options: {
-          patterns: [
-            {
-              match: 'EXPLORER_API_PREFIX',
-              replacement: '<%= pkg.explorerConfig.apiPrefix %>'
-            }
-          ],
-          usePrefix: false
-        },
-        files: [
-          {src: ['public/src/templates/api.js'], dest: 'public/src/js/services/api.js'}
-        ]
-      }
-    },
     concat: {
       options: {
         process: function(src, filepath) {
@@ -53,7 +37,7 @@ module.exports = function(grunt) {
         dest: 'public/js/angularjs-all.js'
       },
       main: {
-        src: ['public/src/js/app.js', 'public/src/js/controllers/*.js', 'public/src/js/services/*.js', 'public/src/js/directives.js', 'public/src/js/filters.js', 'public/src/js/config.js', 'public/src/js/init.js', 'public/src/js/translations.js'],
+        src: ['public/src/js/app.js', 'public/src/js/controllers/*.js', 'public/src/js/services/*.js', 'public/src/js/directives.js', 'public/src/js/filters.js', 'public/src/js/config.js', 'public/src/js/config-node.js', 'public/src/js/init.js', 'public/src/js/translations.js'],
         dest: 'public/js/main.js'
       },
       css: {
@@ -136,13 +120,13 @@ module.exports = function(grunt) {
   grunt.option('force', true);
 
   //Default task(s).
-  grunt.registerTask('default', ['replace', 'watch']);
+  grunt.registerTask('default', ['watch']);
 
   //Update .pot file
   grunt.registerTask('translate', ['nggettext_extract']);
 
   //Compile task (concat + minify)
-  grunt.registerTask('compile', ['replace', 'nggettext_compile', 'concat', 'uglify', 'cssmin']);
+  grunt.registerTask('compile', ['nggettext_compile', 'concat', 'uglify', 'cssmin']);
 
 
 };

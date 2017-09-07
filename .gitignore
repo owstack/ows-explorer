@@ -41,6 +41,7 @@ db/testnet/blocks
 public/js/angularjs-all.js
 public/js/main.js
 public/js/vendors.js
+public/js/ows-node-config.js
 
 public/css/main.css
 

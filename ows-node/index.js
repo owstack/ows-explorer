@@ -7,16 +7,15 @@ var pkg = require('../package');
 
 var ExplorerUI = function(options) {
   BaseService.call(this, options);
-  // we don't use the options object for routePrefix and apiPrefix, since the
-  // client must be rebuilt with the proper options. A future version of 
-  // Bcccore should allow for a service "build" step to make this better.
-  this.apiPrefix = pkg.explorerConfig.apiPrefix;
-  this.routePrefix = pkg.explorerConfig.routePrefix;
-};
+  // Write the node config to an angular constant module that gets evaluated at app start up.
+  // Clone options and remove `node` to avoid JSON.stringify circular ref.
+  var config = Object.assign({}, options);
+  delete config.node;
 
-ExplorerUI.dependencies = [
-  'bcccore-explorer-api'
-];
+  this.routePrefix = config.routePrefix || pkg.explorerConfig.routePrefix;
+  config.fullNodes = config.fullNodes || pkg.explorerConfig.fullNodes;
+  fs.writeFileSync(__dirname + '/../public/js/ows-node-config.js', 'angular.module(\'explorer\').constant(\'nodeConfig\', ' + JSON.stringify(config, null, 2) + ');');
+};
 
 inherits(ExplorerUI, BaseService);
 

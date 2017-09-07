@@ -16,11 +16,15 @@
     "btccore",
     "front-end"
   ],
-  "bcccoreNode": "bcccore-node",
-  "btccoreNode": "btccore-node",
+  "owsNode": "ows-node",
   "explorerConfig": {
-    "apiPrefix": "explorer-api",
-    "routePrefix": "explorer"
+    "routePrefix": "explorer",
+    "fullNodes": [
+        {
+          "url": "",
+          "apiPrefix": "explorer-api"
+        }
+      ]
   },
   "scripts": {
     "build": "bower install && grunt compile",
