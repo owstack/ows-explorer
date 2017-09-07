@@ -1,6 +1,6 @@
 'use strict';
 
 angular.module('explorer.currency').factory('Currency',
-  function($resource, Api) {
-    return $resource(Api.apiPrefix + '/currency');
+  function($resource, NodeManager) {
+    return $resource(NodeManager.getSelectedNode().api + '/currency');
 });

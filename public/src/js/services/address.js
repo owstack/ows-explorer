@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('explorer.address').factory('Address',
-  function($resource, Api) {
-  return $resource(Api.apiPrefix + '/addr/:addrStr/?noTxList=1', {
+  function($resource, NodeManager) {
+  return $resource(NodeManager.getSelectedNode().api + '/addr/:addrStr/?noTxList=1', {
     addrStr: '@addStr'
   }, {
     get: {

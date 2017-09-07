@@ -2,16 +2,16 @@
 
 angular.module('explorer.status')
   .factory('Status',
-    function($resource, Api) {
-      return $resource(Api.apiPrefix + '/status', {
+    function($resource, NodeManager) {
+      return $resource(NodeManager.getSelectedNode().api + '/status', {
         q: '@q'
       });
     })
   .factory('Sync',
-    function($resource, Api) {
-      return $resource(Api.apiPrefix + '/sync');
+    function($resource, NodeManager) {
+      return $resource(NodeManager.getSelectedNode().api + '/sync');
     })
   .factory('PeerSync',
-    function($resource, Api) {
-      return $resource(Api.apiPrefix + '/peer');
+    function($resource, NodeManager) {
+      return $resource(NodeManager.getSelectedNode().api + '/peer');
     });

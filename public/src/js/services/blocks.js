@@ -2,8 +2,8 @@
 
 angular.module('explorer.blocks')
   .factory('Block',
-    function($resource, Api) {
-    return $resource(Api.apiPrefix + '/block/:blockHash', {
+    function($resource, NodeManager) {
+    return $resource(NodeManager.getSelectedNode().api + '/block/:blockHash', {
       blockHash: '@blockHash'
     }, {
       get: {
@@ -22,10 +22,10 @@ angular.module('explorer.blocks')
     });
   })
   .factory('Blocks',
-    function($resource, Api) {
-      return $resource(Api.apiPrefix + '/blocks');
+    function($resource, NodeManager) {
+      return $resource(NodeManager.getSelectedNode().api + '/blocks');
   })
   .factory('BlockByHeight',
-    function($resource, Api) {
-      return $resource(Api.apiPrefix + '/block-index/:blockHeight');
+    function($resource, NodeManager) {
+      return $resource(NodeManager.getSelectedNode().api + '/block-index/:blockHeight');
   });

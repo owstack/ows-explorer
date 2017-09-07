@@ -5,6 +5,7 @@ var defaultCurrency = localStorage.getItem('explorer-currency') || 'BTC';
 
 angular.module('explorer',[
   'ngAnimate',
+  'ngLodash',
   'ngResource',
   'ngRoute',
   'ngProgress',

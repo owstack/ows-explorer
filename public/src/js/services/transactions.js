@@ -2,8 +2,8 @@
 
 angular.module('explorer.transactions')
   .factory('Transaction',
-    function($resource, Api) {
-    return $resource(Api.apiPrefix + '/tx/:txId', {
+    function($resource, NodeManager) {
+    return $resource(NodeManager.getSelectedNode().api + '/tx/:txId', {
       txId: '@txId'
     }, {
       get: {
@@ -22,18 +22,18 @@ angular.module('explorer.transactions')
     });
   })
   .factory('TransactionsByBlock',
-    function($resource, Api) {
-    return $resource(Api.apiPrefix + '/txs', {
+    function($resource, NodeManager) {
+    return $resource(NodeManager.getSelectedNode().api + '/txs', {
       block: '@block'
     });
   })
   .factory('TransactionsByAddress',
-    function($resource, Api) {
-    return $resource(Api.apiPrefix + '/txs', {
+    function($resource, NodeManager) {
+    return $resource(NodeManager.getSelectedNode().api + '/txs', {
       address: '@address'
     });
   })
   .factory('Transactions',
-    function($resource, Api) {
-      return $resource(Api.apiPrefix + '/txs');
+    function($resource, NodeManager) {
+      return $resource(NodeManager.getSelectedNode().api + '/txs');
   });
