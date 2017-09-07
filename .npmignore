@@ -13,6 +13,7 @@ logs
 results
 build
 
+bower_components
 node_modules
 
 # extras

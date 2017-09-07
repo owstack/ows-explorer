@@ -20,11 +20,11 @@
   "explorerConfig": {
     "routePrefix": "explorer",
     "fullNodes": [
-        {
-          "url": "",
-          "apiPrefix": "explorer-api"
-        }
-      ]
+      {
+        "url": "",
+        "apiPrefix": "explorer-api"
+      }
+    ]
   },
   "scripts": {
     "build": "bower install && grunt compile",
