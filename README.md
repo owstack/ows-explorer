@@ -47,30 +47,72 @@ A watch task is also available:
 $ npm run watch
 ```
 
-## Changing routePrefix and apiPrefix
+## Configuring nodes
 
-By default, the `explorerConfig` in `package.json` is:
-
-```json
-  "explorerConfig": {
-    "apiPrefix": "explorer-api",
-    "routePrefix": "explorer"
-  }
-```
-
-To change these routes, first make your changes to `package.json`, for example:
+By default, the `explorerConfig` in `package.json` is as follows.  The explorer will connect to its own host for blockchain data.
 
 ```json
   "explorerConfig": {
-    "apiPrefix": "api",
-    "routePrefix": ""
+    "routePrefix": "explorer",
+    "fullNodes": [
+      {
+        "url": "",
+        "apiPrefix": "explorer-api"
+      }
+    ]
   }
 ```
 
-Then rebuild the `ows-explorer` service:
+To change these settings configure your OWS node (e.g., see `~./btccore-node.json` on your OWS node host).  The following will connect the explorer to a remote node for blockchain data.
 
+```json
+{
+  "network": "livenet",
+  "port": 3001,
+  "services": [
+    "ows-explorer",
+    "web"
+  ],
+	"servicesConfig": {
+    "ows-explorer": {
+      "routePrefix": "explorer",
+      "fullNodes": [
+        {
+          "url": "http://example.com:3001",
+          "apiPrefix": "explorer-api"
+        }
+      ]
+    }
+	}
+}
 ```
-$ npm run build
+
+The explorer can connect to multiple nodes, each providing backend services for different blockchains.
+
+```json
+{
+  "network": "livenet",
+  "port": 3001,
+  "services": [
+    "ows-explorer",
+    "web"
+  ],
+	"servicesConfig": {
+    "ows-explorer": {
+      "routePrefix": "explorer",
+      "fullNodes": [
+        {
+          "url": "http://btc.example.com:3001",
+          "apiPrefix": "explorer-api"
+        },
+        {
+          "url": "http://bcc.example.com:3001",
+          "apiPrefix": "explorer-api"
+        }
+      ]
+    }
+	}
+}
 ```
 
 ## Multilanguage support

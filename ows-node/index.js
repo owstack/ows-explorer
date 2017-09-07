@@ -7,12 +7,13 @@ var pkg = require('../package');
 
 var ExplorerUI = function(options) {
   BaseService.call(this, options);
-  this.routePrefix = options.routePrefix || pkg.explorerConfig.routePrefix;
-
   // Write the node config to an angular constant module that gets evaluated at app start up.
   // Clone options and remove `node` to avoid JSON.stringify circular ref.
   var config = Object.assign({}, options);
   delete config.node;
+
+  this.routePrefix = config.routePrefix || pkg.explorerConfig.routePrefix;
+  config.fullNodes = config.fullNodes || pkg.explorerConfig.fullNodes;
   fs.writeFileSync(__dirname + '/../public/js/ows-node-config.js', 'angular.module(\'explorer\').constant(\'nodeConfig\', ' + JSON.stringify(config, null, 2) + ');');
 };
 

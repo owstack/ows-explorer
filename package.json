@@ -17,6 +17,15 @@
     "front-end"
   ],
   "owsNode": "ows-node",
+  "explorerConfig": {
+    "routePrefix": "explorer",
+    "fullNodes": [
+        {
+          "url": "",
+          "apiPrefix": "explorer-api"
+        }
+      ]
+  },
   "scripts": {
     "build": "bower install && grunt compile",
     "watch": "grunt"
