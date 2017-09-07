@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('explorer.api').factory('NodeManager',
-  function(nodeConfig, lodash) {
+  function($resource, nodeConfig, lodash) {
   	var root = {};
 
   	// Initialize nodes list from configuration.
@@ -15,6 +15,19 @@ angular.module('explorer.api').factory('NodeManager',
 			info: ''
 		};
 
+    var setNodeInfo = function(node) {
+      var Status = $resource(node.api + '/status', {q: '@q'});
+      Status.get({q: 'getInfo'},
+        function(d) {
+          node.info = d.info;
+        },
+        function(e) {
+          node.info = {
+            error: 'API ERROR: ' + e.data
+          }
+        });
+    };
+
   	for (var i = 0; i < nodeConfig.fullNodes.length; i++) {
   		if (nodeConfig.fullNodes[i].url && nodeConfig.fullNodes[i].apiPrefix) {
     		nodes.push({
@@ -23,29 +36,17 @@ angular.module('explorer.api').factory('NodeManager',
     			api: nodeConfig.fullNodes[i].url + '/' + nodeConfig.fullNodes[i].apiPrefix,
     			info: {}
     		});
-
     		setNodeInfo(nodes[nodes.length-1]);
   		}
   	}
 
-    var setNodeInfo = function(node) {
-      Status.get({
-          q: 'getInfo'
-        },
-        function(d) {
-          node.info = d;
-        },
-        function(e) {
-          var error = 'API ERROR: ' + e.data;
-        });
-    };
     root.getNodes = function() {
     	return nodes;
     };
 
 		root.getSelectedNode = function() {
-			var n = lodash.find(node, function(n) {
-				return n.index == selectedNodeId;
+			var n = lodash.find(nodes, function(n) {
+				return n.id == selectedNodeId;
 			});
 			return (n ? n : emptyNode);
 	  };
