@@ -7,6 +7,7 @@ module.exports = function(grunt) {
   //Load NPM tasks
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-css');
   grunt.loadNpmTasks('grunt-markdown');
@@ -31,7 +32,7 @@ module.exports = function(grunt) {
       vendors: {
         src: [
           'public/src/js/ios-imagefile-megapixel/megapix-image.js',
-          'public/lib/qrcode-generator/js/qrcode.js',
+          'bower_components/qrcode-generator/js/qrcode.js',
           'public/src/js/jsqrcode/grid.js',
           'public/src/js/jsqrcode/version.js',
           'public/src/js/jsqrcode/detector.js',
@@ -49,9 +50,9 @@ module.exports = function(grunt) {
           'public/src/js/jsqrcode/findpat.js',
           'public/src/js/jsqrcode/alignpat.js',
           'public/src/js/jsqrcode/databr.js',
-          'public/lib/momentjs/min/moment.min.js',
-          'public/lib/moment/lang/es.js',
-          'public/lib/zeroclipboard/ZeroClipboard.min.js'
+          'bower_components/momentjs/min/moment.min.js',
+          'bower_components/moment/lang/es.js',
+          'bower_components/zeroclipboard/ZeroClipboard.min.js'
         ],
         dest: 'public/js/vendors.js'
       },
@@ -88,10 +89,18 @@ module.exports = function(grunt) {
       },
       css: {
         src: [
-          'public/lib/bootstrap/dist/css/bootstrap.min.css',
+          'bower_components/bootstrap/dist/css/bootstrap.min.css',
           'public/src/css/**/*.css'
         ],
         dest: 'public/css/main.css'
+      }
+    },
+    copy: {
+      zeroclipboard: {
+        expand: true,
+        flatten: true,
+        src: 'bower_components/zeroclipboard/ZeroClipboard.swf',
+        dest: 'public/lib/zeroclipboard/'
       }
     },
     uglify: {
@@ -180,7 +189,7 @@ module.exports = function(grunt) {
   grunt.registerTask('translate', ['nggettext_extract']);
 
   //Compile task (concat + minify)
-  grunt.registerTask('compile', ['nggettext_compile', 'concat', 'uglify', 'cssmin']);
+  grunt.registerTask('compile', ['nggettext_compile', 'concat', 'copy', 'uglify', 'cssmin']);
 
 
 };
