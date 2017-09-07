@@ -17,6 +17,8 @@ var ExplorerUI = function(options) {
   fs.writeFileSync(__dirname + '/../public/js/ows-node-config.js', 'angular.module(\'explorer\').constant(\'nodeConfig\', ' + JSON.stringify(config, null, 2) + ');');
 };
 
+ExplorerUI.dependencies = [];
+
 inherits(ExplorerUI, BaseService);
 
 ExplorerUI.prototype.start = function(callback) {

@@ -14,6 +14,7 @@ logs
 results
 build
 
+bower_components
 node_modules
 
 # extras
@@ -27,7 +28,6 @@ npm-debug.log
 .nodemonignore
 
 .DS_Store
-public/lib/*
 !public/lib/zeroclipboard/ZeroClipboard.swf
 db/txs/*
 db/txs
