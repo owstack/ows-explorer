@@ -29,19 +29,24 @@ angular.module('explorer.api').factory('NodeManager',
     };
 
   	for (var i = 0; i < nodeConfig.fullNodes.length; i++) {
-  		if (nodeConfig.fullNodes[i].url && nodeConfig.fullNodes[i].apiPrefix) {
-    		nodes.push({
-    			id: nodes.length,
-    			url: nodeConfig.fullNodes[i].url,
-    			api: nodeConfig.fullNodes[i].url + '/' + nodeConfig.fullNodes[i].apiPrefix,
-    			info: {}
-    		});
-    		setNodeInfo(nodes[nodes.length-1]);
-  		}
+  		nodes.push({
+  			id: nodes.length,
+  			url: nodeConfig.fullNodes[i].url || '',
+  			api: (nodeConfig.fullNodes[i].url || '') + '/' + (nodeConfig.fullNodes[i].apiPrefix || ''),
+  			info: {}
+  		});
+  		setNodeInfo(nodes[nodes.length-1]);
   	}
 
     root.getNodes = function() {
     	return nodes;
+    };
+
+    root.getNodeById = function(id) {
+      var n = lodash.find(nodes, function(n) {
+        return n.id == id;
+      });
+      return (n ? n : emptyNode);
     };
 
 		root.getSelectedNode = function() {
