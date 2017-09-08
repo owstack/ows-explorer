@@ -7,7 +7,7 @@ angular.module('explorer.api').factory('NodeManager',
   	// Initialize nodes list from configuration.
   	var nodes = [];
     var currentNodeId = localStorage.getItem('explorer-node-id');
-    currentNodeId = (typeof currentNodeId != 'string' ? currentNodeId : '0');
+    currentNodeId = (typeof currentNodeId == 'string' ? currentNodeId : '0');
 
     var setNodeInfo = function(node) {
       var Status = $resource(node.api + '/status', {q: '@q'});
