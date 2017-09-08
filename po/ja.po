@@ -22,7 +22,7 @@ msgstr "404 ページがみつかりません (´・ω・`)"
 #: public/views/index.html
 msgid ""
 "<strong>explorer</strong>  is an <a href=\"http://live.explorer.is/\" target="
-"\"_blank\">open-source Bitcoin blockchain explorer</a> with complete REST "
+"\"_blank\">open-source blockchain explorer</a> with complete REST "
 "and websocket APIs that can be used for writing web wallets and other apps  "
 "that need more advanced blockchain queries than provided by bitcoind RPC.  "
 "Check out the <a href=\"https://github.com/owstack/explorer-ui\" target=\"_blank"

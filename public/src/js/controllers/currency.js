@@ -1,64 +1,76 @@
 'use strict';
 
 angular.module('explorer.currency').controller('CurrencyController',
-  function($scope, $rootScope, Currency) {
-    $rootScope.currency.symbol = defaultCurrency;
+  function($scope, $rootScope, lodash, Currency, NodeManager) {
 
-    var _roundFloat = function(x, n) {
-      if(!parseInt(n, 10) || !parseFloat(x)) n = 0;
+    // Initialize currencies for the current node.
+    var standardUnitValue;
 
-      return Math.round(x * Math.pow(10, n)) / Math.pow(10, n);
-    };
+    var _initCurrency = function() {
+      $scope.availableCurrencies = [];
+      $rootScope.currency = {};
 
-    $rootScope.currency.getConvertion = function(value) {
-      value = value * 1; // Convert to number
-
-      if (!isNaN(value) && typeof value !== 'undefined' && value !== null) {
-        if (value === 0.00000000) return '0 ' + this.symbol; // fix value to show
-
-        var response;
-
-        if (this.symbol === 'USD') {
-          response = _roundFloat((value * this.factor), 2);
-        } else if (this.symbol === 'mBTC') {
-          this.factor = 1000;
-          response = _roundFloat((value * this.factor), 5);
-        } else if (this.symbol === 'bits') {
-          this.factor = 1000000;
-          response = _roundFloat((value * this.factor), 2);
-        } else { // assumes symbol is BTC
-          this.factor = 1;
-          response = _roundFloat((value * this.factor), 8);
+      NodeManager.whenAvailable(function(node) {
+        for (var i = 0; i < node.info.units.length; i++) {
+          var unit = node.info.units[i];
+          if (unit.userSelectable) {
+            // Add an id to track selection.
+            unit.id = $scope.availableCurrencies.length.toString(); // An ordinal
+            $scope.availableCurrencies.push(unit);
+          }
         }
-        // prevent sci notation
-        if (response < 1e-7) response=response.toFixed(8);
 
-        return response + ' ' + this.symbol;
-      }
+        $scope.setCurrency();
 
-      return 'value error';
+        // Currency conversions are relative to the standard unit value.
+        standardUnitValue = lodash.find($scope.availableCurrencies, function(c) {
+          return c.kind == 'standard';
+        }).value;
+      });
     };
 
-    $scope.setCurrency = function(currency) {
-      $rootScope.currency.symbol = currency;
-      localStorage.setItem('explorer-currency', currency);
-
-      if (currency === 'USD') {
-        Currency.get({}, function(res) {
-          $rootScope.currency.factor = $rootScope.currency.bitstamp = res.data.bitstamp;
-        });
-      } else if (currency === 'mBTC') {
-        $rootScope.currency.factor = 1000;
-      } else if (currency === 'bits') {
-        $rootScope.currency.factor = 1000000;
-      } else {
-        $rootScope.currency.factor = 1;
-      }
-    };
-
-    // Get initial value
-    Currency.get({}, function(res) {
-      $rootScope.currency.factor = $rootScope.currency.bitstamp = res.data.bitstamp;
+    $rootScope.$on('Local/NodeChange', function(e, nodeId) {
+      _initCurrency();
     });
 
+    $scope.setCurrency = function(currencyId) {
+      if (!currencyId) {
+        currencyId = localStorage.getItem('explorer-currency-id');
+        currencyId = (currencyId != 'undefined' ? currencyId : '0');
+      }
+
+      $rootScope.currency = $scope.availableCurrencies[parseInt(currencyId)];
+      localStorage.setItem('explorer-currency-id', currencyId);
+    };
+
+    // Convert from standard unit to selected currency unit.
+    // This function needed globally.
+    $rootScope.getCurrencyConversion = function(value) {
+
+      var _roundFloat = function(x, n) {
+        if(!parseInt(n, 10) || !parseFloat(x)) n = 0;
+        return Math.round(x * Math.pow(10, n)) / Math.pow(10, n);
+      };
+
+      value = value * 1; // Convert to number
+
+      if (isNaN(value) || typeof value == 'undefined' || value == null) {
+        return 'value error';
+      }
+
+      if (value === 0.00000000) {
+        return '0 ' + $rootScope.currency.shortName;
+      }
+
+      var response = _roundFloat((value * standardUnitValue / $rootScope.currency.value), $rootScope.currency.decimals);
+
+      // Prevent sci notation displayed
+      if (response < 1e-7) {
+        response = response.toFixed(8);
+      }
+
+      return response + ' ' + $rootScope.currency.shortName;
+    };
+
+    _initCurrency();
   });

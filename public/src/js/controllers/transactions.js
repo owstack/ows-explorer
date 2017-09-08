@@ -189,7 +189,7 @@ angular.module('explorer.transactions').controller('SendRawTransactionController
       rawtx: $scope.transaction
     };
     $scope.status = 'loading';
-    $http.post(NodeManager.getSelectedNode().api + '/tx/send', postData)
+    $http.post(NodeManager.getNode().api + '/tx/send', postData)
       .success(function(data, status, headers, config) {
         if(typeof(data.txid) != 'string') {
           // API returned 200 but the format is not known

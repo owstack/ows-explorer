@@ -3,7 +3,7 @@
 angular.module('explorer.blocks')
   .factory('Block',
     function($resource, NodeManager) {
-    return $resource(NodeManager.getSelectedNode().api + '/block/:blockHash', {
+    return $resource(NodeManager.getNode().api + '/block/:blockHash', {
       blockHash: '@blockHash'
     }, {
       get: {
@@ -23,9 +23,9 @@ angular.module('explorer.blocks')
   })
   .factory('Blocks',
     function($resource, NodeManager) {
-      return $resource(NodeManager.getSelectedNode().api + '/blocks');
+      return $resource(NodeManager.getNode().api + '/blocks');
   })
   .factory('BlockByHeight',
     function($resource, NodeManager) {
-      return $resource(NodeManager.getSelectedNode().api + '/block-index/:blockHeight');
+      return $resource(NodeManager.getNode().api + '/block-index/:blockHeight');
   });

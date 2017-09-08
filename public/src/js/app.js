@@ -1,7 +1,6 @@
 'use strict';
 
 var defaultLanguage = localStorage.getItem('explorer-language') || 'en';
-var defaultCurrency = localStorage.getItem('explorer-currency') || 'BTC';
 
 angular.module('explorer',[
   'ngAnimate',

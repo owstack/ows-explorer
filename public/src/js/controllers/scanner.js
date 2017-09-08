@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('explorer.system').controller('ScannerController',
-  function($scope, $rootScope, $modalInstance, Global) {
+  function($scope, $rootScope, $modalInstance, Global, NodeManager) {
     $scope.global = Global;
 
     // Detect mobile devices
@@ -111,8 +111,22 @@ angular.module('explorer.system').controller('ScannerController',
 
     qrcode.callback = function(data) {
       _scanStop();
+      str = data.trim();
 
-      var str = (data.indexOf('bitcoin:') === 0) ? data.substring(8) : data; 
+      // Detect a protocol and switch nodes if able.
+      if (str.indexOf(':') > 0) {
+        var protocol = data.substr(0, str.indexOf(':') + 1);
+        var requiredNode = NodeManager.getNodeByProtocol(protocol);
+
+        if (requiredNode) {
+          NodeManager.setNode(requiredNode.id);
+        } else {
+          $rootScope.flashMessage = 'Warning: unknown protocol \'' + protocol + '\'';
+          console.log('Warning: unknown protocol \'' + protocol + '\'');
+        }
+        str = data.substring(protocol.length);
+      }
+
       console.log('QR code detected: ' + str);
       $searchInput
         .val(str)

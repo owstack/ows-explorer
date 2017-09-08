@@ -55,7 +55,7 @@ ScopedSocket.prototype.emit = function(event, data, callback) {
 
 angular.module('explorer.socket').factory('getSocket',
   function($rootScope, NodeManager) {
-    var socket = io.connect(NodeManager.getSelectedNode().url, {
+    var socket = io.connect(NodeManager.getNode().url, {
       'reconnect': true,
       'reconnection delay': 500,
     });
