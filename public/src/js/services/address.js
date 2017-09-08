@@ -2,7 +2,7 @@
 
 angular.module('explorer.address').factory('Address',
   function($resource, NodeManager) {
-  return $resource(NodeManager.getSelectedNode().api + '/addr/:addrStr/?noTxList=1', {
+  return $resource(NodeManager.getNode().api + '/addr/:addrStr/?noTxList=1', {
     addrStr: '@addStr'
   }, {
     get: {

@@ -8,5 +8,5 @@ angular.module('explorer.system')
   ])
   .factory('Version',
     function($resource, NodeManager) {
-      return $resource(NodeManager.getSelectedNode().api + '/version');
+      return $resource(NodeManager.getNode().api + '/version');
   });

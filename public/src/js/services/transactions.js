@@ -3,7 +3,7 @@
 angular.module('explorer.transactions')
   .factory('Transaction',
     function($resource, NodeManager) {
-    return $resource(NodeManager.getSelectedNode().api + '/tx/:txId', {
+    return $resource(NodeManager.getNode().api + '/tx/:txId', {
       txId: '@txId'
     }, {
       get: {
@@ -23,17 +23,17 @@ angular.module('explorer.transactions')
   })
   .factory('TransactionsByBlock',
     function($resource, NodeManager) {
-    return $resource(NodeManager.getSelectedNode().api + '/txs', {
+    return $resource(NodeManager.getNode().api + '/txs', {
       block: '@block'
     });
   })
   .factory('TransactionsByAddress',
     function($resource, NodeManager) {
-    return $resource(NodeManager.getSelectedNode().api + '/txs', {
+    return $resource(NodeManager.getNode().api + '/txs', {
       address: '@address'
     });
   })
   .factory('Transactions',
     function($resource, NodeManager) {
-      return $resource(NodeManager.getSelectedNode().api + '/txs');
+      return $resource(NodeManager.getNode().api + '/txs');
   });

@@ -1,0 +1,8 @@
+<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+  {{$root.node.info.description.name}} <span class="caret"></span>
+</a>
+<ul class="dropdown-menu">
+  <li ng-repeat="n in availableNodes">
+	  <a data-ng-click="setNode(n.id)">{{n.info.description.name}}</a>
+  </li>
+</ul>
