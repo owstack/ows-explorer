@@ -49,7 +49,7 @@ angular.module('explorer.blocks').controller('BlocksController',
     $scope.loading = true;
 
     if ($routeParams.blockDate) {
-      $scope.detail = 'On ' + $routeParams.blockDate;
+      $scope.detail = 'on ' + $routeParams.blockDate;
     }
 
     if ($routeParams.startTimestamp) {

@@ -1,18 +1,9 @@
 'use strict';
 
 angular.module('explorer.system').controller('FooterController',
-  function($scope, $route, $templateCache, gettextCatalog, amMoment,  Version) {
+  function($scope, $route, $templateCache, gettextCatalog, amMoment) {
 
     $scope.defaultLanguage = defaultLanguage;
-
-    var _getVersion = function() {
-      Version.get({},
-        function(res) {
-          $scope.version = res.version;
-        });
-    };
-
-    $scope.version = _getVersion();
 
     $scope.availableLanguages = [{
       name: 'Deutsch',
