@@ -22,7 +22,7 @@ angular.module('explorer.currency').controller('CurrencyController',
 
         $scope.setCurrency();
 
-        // Currency conversions are relative to the standard unit value.
+        // Currency conversions (non-fiat) are relative to the standard unit value.
         standardUnitValue = lodash.find($scope.availableCurrencies, function(c) {
           return c.kind == 'standard';
         }).value;
@@ -41,6 +41,13 @@ angular.module('explorer.currency').controller('CurrencyController',
 
       $rootScope.currency = $scope.availableCurrencies[parseInt(currencyId)];
       localStorage.setItem('explorer-currency-id', currencyId);
+
+      // For fiat currencies get the merket exchange rate for conversions.
+      if ($rootScope.currency.kind == 'fiat') {
+        Currency.get({}, function(res) {
+          $rootScope.currency.value = res.data.rates[$rootScope.currency.code].rate;
+        });
+      }
     };
 
     // Convert from standard unit to selected currency unit.
@@ -62,7 +69,12 @@ angular.module('explorer.currency').controller('CurrencyController',
         return '0 ' + $rootScope.currency.shortName;
       }
 
-      var response = _roundFloat((value * standardUnitValue / $rootScope.currency.value), $rootScope.currency.decimals);
+      var response;
+      if ($rootScope.currency.kind == 'fiat') {
+        response = _roundFloat((value * $rootScope.currency.value), $rootScope.currency.decimals);
+      } else {
+        response = _roundFloat((value * standardUnitValue / $rootScope.currency.value), $rootScope.currency.decimals);
+      }
 
       // Prevent sci notation displayed
       if (response < 1e-7) {
