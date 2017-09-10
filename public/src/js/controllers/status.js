@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('explorer.status').controller('StatusController',
-  function($scope, $routeParams, $location, Global, Status, Sync, getSocket) {
+  function($scope, $routeParams, $location, Global, Status, Sync, getSocket, Version) {
     $scope.global = Global;
 
     $scope.getStatus = function(q) {
@@ -52,4 +52,14 @@ angular.module('explorer.status').controller('StatusController',
           };
         });
     };
+
+    var _getVersion = function() {
+      Version.get({},
+        function(res) {
+          $scope.version = res.version;
+        });
+    };
+
+    $scope.version = _getVersion();
+    
   });

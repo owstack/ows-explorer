@@ -36,7 +36,7 @@ angular.module('explorer.currency').controller('CurrencyController',
     $scope.setCurrency = function(currencyId) {
       if (!currencyId) {
         currencyId = localStorage.getItem('explorer-currency-id');
-        currencyId = (currencyId != 'undefined' ? currencyId : '0');
+        currencyId = (typeof currencyId == 'string' ? currencyId : '0');
       }
 
       $rootScope.currency = $scope.availableCurrencies[parseInt(currencyId)];

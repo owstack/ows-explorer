@@ -1,7 +1,7 @@
 <section data-ng-controller="VerifyMessageController">
   <div class="page-header">
     <h1>
-      <span translate>Verify signed message</span>
+      <span translate>Verify Signed Message</span>
     </h1>
   </div>
   <div class="row">
@@ -70,10 +70,10 @@
     </div>
     <div class="col-xs-12 col-md-4 col-gray">
       <p translate>
-        Digitial currencies comes with a way of signing arbitrary messages.
+        {{$root.node.info.description.name}} comes with a way of signing arbitrary messages.
       </p>
       <p translate>
-        This form can be used to verify that a message comes from a specific digitial currency address.
+        This form can be used to verify that a message comes from a specific {{$root.node.info.description.name}} address.
       </p>
     </div>
   </div>
