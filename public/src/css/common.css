@@ -85,14 +85,14 @@
 
 html,
 body {
-  color: #373D42;
+  color: #2A2E32;
   font-family: 'Open Sans', sans-serif;
   height: 100%;
   /* The html and body elements cannot have any padding or margin. */
 }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-  color: #373D42;
+  color: #2A2E32;
   font-family: 'Open Sans', sans-serif;
 }
 
@@ -106,7 +106,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 #ngProgress {
   background-color: #4a90e2 !important;
   box-shadow: none !important;
-  color: #373D42 !important;
+  color: #2A2E32 !important;
   height: 3px !important;
   margin: 0;
   opacity: 0;
@@ -203,11 +203,11 @@ margin-left: 0;
   background-color: #fff;
 }
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
-  background-color: #373D42;
+  background-color: #2A2E32;
 }
 
 .navbar-default {
-  background-color: #373d42;
+  background-color: #2A2E32;
   margin: 0;
   border: 0;
 }
@@ -221,7 +221,7 @@ margin-left: 0;
 
 .navbar-default .navbar-nav>.active>a,
 .navbar-default .navbar-nav>.active>a:focus {
-  background-color: #373d42;
+  background-color: #2A2E32;
   color: #c5c5c5;
 }
 
@@ -229,7 +229,7 @@ margin-left: 0;
 .navbar-default .navbar-nav>li>a:hover,
 .navbar-default .navbar-nav>.active>a:focus,
 .navbar-default .navbar-nav>.active>a:hover {
-  background-color: #373d42;
+  background-color: #2A2E32;
   color: #c5c5c5;
 }
 
@@ -237,7 +237,7 @@ margin-left: 0;
 .navbar-default .navbar-nav>.open>a:active,
 .navbar-default .navbar-nav>.open>a:hover,
 .navbar-default .navbar-nav>.open>a:focus {
-  background-color: #373d42;
+  background-color: #2A2E32;
   color: #c5c5c5;
 }
 
@@ -397,7 +397,7 @@ margin-left: 0;
 }
 
 .block-id {
-  background-color: #373D42;
+  background-color: #2A2E32;
   border: 3px solid #FFFFFF;
   margin: 0 auto;
   width: 165px;
@@ -456,7 +456,7 @@ margin-left: 0;
 .btn-danger.active, .open .dropdown-toggle.btn-danger {
   background-color: #fff;
   border: 1px solid #ccc;
-  color: #373D42;
+  color: #2A2E32;
 }
 
 .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default {
@@ -506,7 +506,7 @@ margin-left: 0;
 
 .txvalues-default {
   background-color: #EBEBEB;
-  color: #373d42;
+  color: #2A2E32;
 }
 
 .txvalues-success {
@@ -520,7 +520,7 @@ margin-left: 0;
 .txvalues-normal {
   background-color: transparent;
   text-transform: none;
-  color: #373d42;
+  color: #2A2E32;
   font-size: 14px;
   font-weight: normal;
 }
@@ -530,7 +530,7 @@ margin-left: 0;
 
 /* Set the fixed height of the footer here */
 #footer {
-  background-color: #373D42;
+  background-color: #2A2E32;
   color: #fff;
   height: 51px;
   overflow: hidden;
@@ -679,7 +679,7 @@ margin-left: 0;
   background-color: #2d6987;
 }
 .badge-inverse {
-  background-color: #373d42;
+  background-color: #2A2E32;
 }
 .badge-inverse:hover {
   background-color: #1a1a1a;
@@ -743,7 +743,7 @@ margin-left: 0;
 }
 
 .tx-id {
-  background-color: #373D42;
+  background-color: #2A2E32;
   border: 3px solid #FFFFFF;
   margin: 0 auto;
   width: 165px;
@@ -850,12 +850,12 @@ margin-left: 0;
   padding: 1em 0;
   background-color: #e9e9e9;
   overflow: hidden;
-  color: #373d42;
+  color: #2A2E32;
 }
 
 a.v_highlight_more {
   background-color: #e7e7e7;
-  color: #373d42;
+  color: #2A2E32;
 }
 
 .secondary_navbar {
