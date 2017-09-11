@@ -4,7 +4,7 @@ angular.module('explorer.currency').controller('CurrencyController',
   function($scope, $rootScope, lodash, Currency, NodeManager) {
 
     // Initialize currencies for the current node.
-    var standardUnitValue;
+    var standardUnit;
 
     var _initCurrency = function() {
       $scope.availableCurrencies = [];
@@ -23,9 +23,9 @@ angular.module('explorer.currency').controller('CurrencyController',
         $scope.setCurrency();
 
         // Currency conversions (non-fiat) are relative to the standard unit value.
-        standardUnitValue = lodash.find($scope.availableCurrencies, function(c) {
+        standardUnit = lodash.find($scope.availableCurrencies, function(c) {
           return c.kind == 'standard';
-        }).value;
+        });
       });
     };
 
@@ -46,6 +46,10 @@ angular.module('explorer.currency').controller('CurrencyController',
       if ($rootScope.currency.kind == 'fiat') {
         Currency.get({}, function(res) {
           $rootScope.currency.value = res.data.rates[$rootScope.currency.code].rate;
+          // Exchange rate status info.
+          $rootScope.currency.source = res.data.rates[$rootScope.currency.code].name;
+          $rootScope.currency.rateStr = '1 ' + standardUnit.shortName + ' = ' +
+            $rootScope.currency.value.toFixed($rootScope.currency.decimals) + ' ' + $rootScope.currency.shortName;
         });
       }
     };
@@ -66,22 +70,17 @@ angular.module('explorer.currency').controller('CurrencyController',
       }
 
       if (value === 0.00000000) {
-        return '0 ' + $rootScope.currency.shortName;
+        return value.toFixed($rootScope.currency.decimals) + ' '+ $rootScope.currency.shortName;
       }
 
       var response;
       if ($rootScope.currency.kind == 'fiat') {
         response = _roundFloat((value * $rootScope.currency.value), $rootScope.currency.decimals);
       } else {
-        response = _roundFloat((value * standardUnitValue / $rootScope.currency.value), $rootScope.currency.decimals);
+        response = _roundFloat((value * standardUnit.value / $rootScope.currency.value), $rootScope.currency.decimals);
       }
 
-      // Prevent sci notation displayed
-      if (response < 1e-7) {
-        response = response.toFixed(8);
-      }
-
-      return response + ' ' + $rootScope.currency.shortName;
+      return response.toFixed($rootScope.currency.decimals) + ' ' + $rootScope.currency.shortName;
     };
 
     _initCurrency();
