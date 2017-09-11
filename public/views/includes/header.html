@@ -29,6 +29,10 @@
         </span> &middot;
         <strong>{{'Height'|translate}}</strong> {{totalBlocks || info.blocks}}
       </div>
+      <div class="status m20ri" data-ng-show="$root.currency.source">
+        <strong>{{$root.currency.source}}</strong> &middot;
+        {{$root.currency.rateStr}}
+      </div>
     </div>
     <div class="navbar-collapse collapse" collapse="$root.isCollapsed">
       <ul class="nav navbar-nav">

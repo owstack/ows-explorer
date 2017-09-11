@@ -6,6 +6,14 @@
   <div id="status" class="row">
 
     <div class="col-xs-12 col-md-8">
+      <table class="table" data-ng-show="$root.currency.source">
+        <tbody>
+          <tr class="borderless">
+            <td translate>{{$root.currency.shortName}} exchange rate from {{$root.currency.source}}</td>
+            <td class="text-right">{{$root.currency.rateStr}}</td>
+          </tr>
+        </tbody>
+      </table>
       <h2 translate>Sync Status</h2>
       <table class="table" data-ng-controller="StatusController" data-ng-init="getSync()">
         <tbody>
