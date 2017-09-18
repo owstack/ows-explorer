@@ -1,9 +1,18 @@
 'use strict';
 
-var ScopedSocket = function(socket, $rootScope) {
+var ScopedSocket = function(socket, $rootScope, $timeout) {
   this.socket = socket;
   this.$rootScope = $rootScope;
+  this.$timeout = $timeout;
   this.listeners = [];
+};
+
+ScopedSocket.prototype.isConnected = function() {
+  return this.socket.connected;
+};
+
+ScopedSocket.prototype.disconnect = function() {
+  this.socket.disconnect();
 };
 
 ScopedSocket.prototype.removeAllListeners = function(opts) {
@@ -53,22 +62,53 @@ ScopedSocket.prototype.emit = function(event, data, callback) {
   socket.emit.apply(socket, args);
 };
 
-angular.module('explorer.socket').factory('getSocket',
-  function($rootScope, NodeManager) {
-    var socket = io.connect(NodeManager.getNode().url, {
-      'reconnect': true,
-      'reconnection delay': 500,
+angular.module('explorer.socket').factory('socketService',
+  function($rootScope, $timeout, NodeManager) {
+    var root = {};
+    var socket;
+    var scopedSocket;
+
+    var _connect = function(node) {
+      socket = io.connect(node.url, {
+        'reconnect': true,
+        'reconnection delay': 500
+      });
+    };
+
+    var _disconnect = function(callback) {
+      scopedSocket.removeAllListeners();
+      $timeout(function() {
+        scopedSocket.disconnect();
+        callback();
+      }, 100);
+    };
+
+    $rootScope.$on('Local/NodeChange', function(event, node) {
+      _disconnect(function() {
+        _connect(node);
+        $rootScope.$emit('Local/SocketChange');
+      });
     });
-    return function(scope) {
-      var scopedSocket = new ScopedSocket(socket, $rootScope);
+
+    root.getSocket = function(scope) {
+      scopedSocket = new ScopedSocket(socket, $rootScope, $timeout);
+
       scope.$on('$destroy', function() {
         scopedSocket.removeAllListeners();
       });
+
       socket.on('connect', function() {
         scopedSocket.removeAllListeners({
           skipConnect: true
         });
       });
+
       return scopedSocket;
     };
+
+    // Establish initial connection without sending an event.
+    _connect(NodeManager.getNode());
+
+    return root;
+
   });

@@ -1,5 +1,5 @@
 <div data-ng-include src="'views/includes/connection.html'"></div>
-<section data-ng-controller="AddressController" data-ng-init="findOne()">
+<section data-ng-controller="AddressController">
   <div class="secondary_navbar hidden-xs hidden-sm" scroll data-ng-class="{'hidden': !secondaryNavbar}" data-ng-show="address.addrStr" data-ng-init="hideSNavbar=0">
     <div class="container" data-ng-if="!hideSNavbar">
       <div class="col-md-8 text-left">
@@ -72,7 +72,7 @@
       </table>
     </div>
   </div>
-  <div data-ng-if="address.addrStr" data-ng-controller="transactionsController" data-ng-init="load('address')">
+  <div data-ng-if="address.addrStr" data-ng-controller="TransactionsController" data-ng-init="load('address')">
     <h2 translate>Transactions</h2>
     <div data-ng-include src="'views/transaction/list.html'" when-scrolled="loadMore()"></div>
   </div>

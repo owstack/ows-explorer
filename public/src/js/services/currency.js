@@ -2,5 +2,13 @@
 
 angular.module('explorer.currency').factory('Currency',
   function($resource, NodeManager) {
-    return $resource(NodeManager.getNode().api + '/currency');
-});
+    var root = {};
+
+    root.get = function(success, error) {
+      var r = $resource(NodeManager.getNode().api + '/currency');
+      r.get(success, error);
+    };
+
+    return root;
+	}
+);

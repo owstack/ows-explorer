@@ -4,7 +4,7 @@ angular.module('explorer.currency').controller('CurrencyController',
   function($scope, $rootScope, lodash, Currency, NodeManager) {
 
     // Initialize currencies for the current node.
-    var standardUnit;
+    var initialized = false;
 
     var _initCurrency = function() {
       $scope.availableCurrencies = [];
@@ -21,11 +21,7 @@ angular.module('explorer.currency').controller('CurrencyController',
         }
 
         $scope.setCurrency();
-
-        // Currency conversions (non-fiat) are relative to the standard unit value.
-        standardUnit = lodash.find($scope.availableCurrencies, function(c) {
-          return c.kind == 'standard';
-        });
+        initialized = true;
       });
     };
 
@@ -42,13 +38,20 @@ angular.module('explorer.currency').controller('CurrencyController',
       $rootScope.currency = $scope.availableCurrencies[parseInt(currencyId)];
       localStorage.setItem('explorer-currency-id', currencyId);
 
-      // For fiat currencies get the merket exchange rate for conversions.
+
+      // Currency conversions (non-fiat) are relative to the standard unit value.
+      // Attach the standard unit to the selected currency.
+      $rootScope.currency.standardUnit = lodash.find($scope.availableCurrencies, function(c) {
+        return c.kind == 'standard';
+      });
+
+      // For fiat currencies get the market exchange rate for conversions.
       if ($rootScope.currency.kind == 'fiat') {
         Currency.get({}, function(res) {
           $rootScope.currency.value = res.data.rates[$rootScope.currency.code].rate;
           // Exchange rate status info.
           $rootScope.currency.source = res.data.rates[$rootScope.currency.code].name;
-          $rootScope.currency.rateStr = '1 ' + standardUnit.shortName + ' = ' +
+          $rootScope.currency.rateStr = '1 ' + $rootScope.currency.standardUnit.shortName + ' = ' +
             $rootScope.currency.value.toFixed($rootScope.currency.decimals) + ' ' + $rootScope.currency.shortName;
         });
       }
@@ -57,6 +60,11 @@ angular.module('explorer.currency').controller('CurrencyController',
     // Convert from standard unit to selected currency unit.
     // This function needed globally.
     $rootScope.getCurrencyConversion = function(value) {
+
+      // Wait for currency to be initialized.
+      if (!initialized) {
+        return '';
+      }
 
       var _roundFloat = function(x, n) {
         if(!parseInt(n, 10) || !parseFloat(x)) n = 0;
@@ -77,7 +85,7 @@ angular.module('explorer.currency').controller('CurrencyController',
       if ($rootScope.currency.kind == 'fiat') {
         response = _roundFloat((value * $rootScope.currency.value), $rootScope.currency.decimals);
       } else {
-        response = _roundFloat((value * standardUnit.value / $rootScope.currency.value), $rootScope.currency.decimals);
+        response = _roundFloat((value * $rootScope.currency.standardUnit.value / $rootScope.currency.value), $rootScope.currency.decimals);
       }
 
       return response.toFixed($rootScope.currency.decimals) + ' ' + $rootScope.currency.shortName;

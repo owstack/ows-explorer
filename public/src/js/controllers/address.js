@@ -1,11 +1,37 @@
 'use strict';
 
 angular.module('explorer.address').controller('AddressController',
-  function($scope, $rootScope, $routeParams, $location, Global, Address, getSocket) {
+  function($scope, $rootScope, $routeParams, $location, Global, Address, socketService) {
     $scope.global = Global;
 
-    var socket = getSocket($scope);
     var addrStr = $routeParams.addrStr;
+    var socket;
+
+    var _init = function() {
+      socket = socketService.getSocket($scope);
+
+      if (!socket.isConnected()) {
+        socket.on('connect', function() {
+          _startSocket();
+          _refresh();
+        });
+      } else {
+        _startSocket();
+        _refresh();
+      }
+    };
+
+    var _refresh = function() {
+      $scope.findOne();
+    };
+
+    $rootScope.$on('Local/SocketChange', function(event) {
+      _init();
+    });
+
+    $scope.$on('$destroy', function() {
+      _stopSocket();
+    });
 
     var _startSocket = function() {
       socket.on('node/addresstxid', function(data) {
@@ -22,16 +48,6 @@ angular.module('explorer.address').controller('AddressController',
     var _stopSocket = function () {
       socket.emit('unsubscribe', 'node/addresstxid', [addrStr]);
     };
-
-    socket.on('connect', function() {
-      _startSocket();
-    });
-
-    $scope.$on('$destroy', function(){
-      _stopSocket();
-    });
-
-    $scope.params = $routeParams;
 
     $scope.findOne = function() {
       $rootScope.currentAddr = $routeParams.addrStr;
@@ -56,5 +72,7 @@ angular.module('explorer.address').controller('AddressController',
           $location.path('/');
         });
     };
+
+    _init();
 
   });

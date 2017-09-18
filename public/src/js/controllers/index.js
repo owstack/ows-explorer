@@ -1,11 +1,36 @@
 'use strict';
 
-var TRANSACTION_DISPLAYED = 10;
-var BLOCKS_DISPLAYED = 5;
-
 angular.module('explorer.system').controller('IndexController',
-  function($scope, Global, getSocket, Blocks) {
+  function($rootScope, $scope, Global, socketService, Blocks) {
     $scope.global = Global;
+
+    var TRANSACTION_DISPLAYED = 10;
+    var BLOCKS_DISPLAYED = 5;
+    var socket;
+
+    var _init = function() {
+      socket = socketService.getSocket($scope);
+
+      if (!socket.isConnected()) {
+        socket.on('connect', function() {
+          _startSocket();
+          _refresh();
+        });
+      } else {
+        _startSocket();
+        _refresh();
+      }
+    };
+
+    var _refresh = function() {
+      $scope.txs = [];
+      $scope.blocks = [];
+      _getBlocks();
+    };
+
+    $rootScope.$on('Local/SocketChange', function(event) {
+      _init();
+    });
 
     var _getBlocks = function() {
       Blocks.get({
@@ -16,10 +41,9 @@ angular.module('explorer.system').controller('IndexController',
       });
     };
 
-    var socket = getSocket($scope);
-
     var _startSocket = function() { 
       socket.emit('subscribe', 'inv');
+
       socket.on('tx', function(tx) {
         $scope.txs.unshift(tx);
         if (parseInt($scope.txs.length, 10) >= parseInt(TRANSACTION_DISPLAYED, 10)) {
@@ -32,22 +56,11 @@ angular.module('explorer.system').controller('IndexController',
       });
     };
 
-    socket.on('connect', function() {
-      _startSocket();
-    });
-
-
-
     $scope.humanSince = function(time) {
       var m = moment.unix(time);
       return m.max().fromNow();
     };
 
-    $scope.index = function() {
-      _getBlocks();
-      _startSocket();
-    };
+    _init();
 
-    $scope.txs = [];
-    $scope.blocks = [];
   });
