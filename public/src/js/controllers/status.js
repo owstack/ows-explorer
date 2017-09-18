@@ -1,20 +1,47 @@
 'use strict';
 
 angular.module('explorer.status').controller('StatusController',
-  function($scope, $routeParams, $location, Global, Status, Sync, getSocket, Version) {
+  function($rootScope, $scope, $routeParams, $location, Global, Status, Sync, socketService, Version) {
     $scope.global = Global;
+
+    var socket;
+
+    var _init = function() {
+      socket = socketService.getSocket($scope);
+
+      if (!socket.isConnected()) {
+        socket.on('connect', function() {
+          _startSocket();
+          _refresh();
+        });
+      } else {
+        _startSocket();
+        _refresh();
+      }
+    };
+
+    var _refresh = function() {
+      $scope.getStatus('Info');
+      $scope.getStatus('LastBlockHash');
+      $scope.getSync();
+      $scope.version = _getVersion();
+    };
+
+    $rootScope.$on('Local/SocketChange', function(event) {
+      _init();
+    });
 
     $scope.getStatus = function(q) {
       Status.get({
-          q: 'get' + q
-        },
-        function(d) {
-          $scope.loaded = 1;
-          angular.extend($scope, d);
-        },
-        function(e) {
-          $scope.error = 'API ERROR: ' + e.data;
-        });
+        query: 'get' + q
+      },
+      function(d) {
+        $scope.loaded = 1;
+        angular.extend($scope, d);
+      },
+      function(e) {
+        $scope.error = 'API ERROR: ' + e.data;
+      });
     };
 
     $scope.humanSince = function(time) {
@@ -33,15 +60,8 @@ angular.module('explorer.status').controller('StatusController',
       });
     };
     
-    var socket = getSocket($scope);
-    socket.on('connect', function() {
-      _startSocket();
-    });
-
-
     $scope.getSync = function() {
-      _startSocket();
-      Sync.get({},
+      Sync.get(
         function(sync) {
           _onSyncUpdate(sync);
         },
@@ -60,6 +80,6 @@ angular.module('explorer.status').controller('StatusController',
         });
     };
 
-    $scope.version = _getVersion();
+    _init();
     
   });

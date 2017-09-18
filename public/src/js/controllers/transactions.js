@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('explorer.transactions').controller('transactionsController',
+angular.module('explorer.transactions').controller('TransactionsController',
 function($scope, $rootScope, $routeParams, $location, Global, Transaction, TransactionsByBlock, TransactionsByAddress) {
   $scope.global = Global;
   $scope.loading = false;
@@ -8,7 +8,6 @@ function($scope, $rootScope, $routeParams, $location, Global, Transaction, Trans
 
   var pageNum = 0;
   var pagesTotal = 1;
-  var COIN = 100000000;
 
   var _aggregateItems = function(items) {
     if (!items) return [];
@@ -57,7 +56,7 @@ function($scope, $rootScope, $routeParams, $location, Global, Transaction, Trans
       tmp[addr].doubleSpentTxID = tmp[addr].doubleSpentTxID   || items[i].doubleSpentTxID;
       tmp[addr].doubleSpentIndex = tmp[addr].doubleSpentIndex || items[i].doubleSpentIndex;
       tmp[addr].dbError = tmp[addr].dbError || items[i].dbError;
-      tmp[addr].valueSat += Math.round(items[i].value * COIN);
+      tmp[addr].valueSat += Math.round(items[i].value * $rootScope.currency.standardUnit.value);
       tmp[addr].items.push(items[i]);
       tmp[addr].notAddr = notAddr;
 
@@ -68,7 +67,7 @@ function($scope, $rootScope, $routeParams, $location, Global, Transaction, Trans
     }
 
     angular.forEach(tmp, function(v) {
-      v.value    = v.value || parseInt(v.valueSat) / COIN;
+      v.value    = v.value || parseInt(v.valueSat) / $rootScope.currency.standardUnit.value;
       ret.push(v);
     });
     return ret;
@@ -133,10 +132,6 @@ function($scope, $rootScope, $routeParams, $location, Global, Transaction, Trans
     });
   };
 
-  $scope.findThis = function() {
-    _findTx($routeParams.txId);
-  };
-
   //Initial load
   $scope.load = function(from) {
     $scope.loadedBy = from;
@@ -171,6 +166,10 @@ function($scope, $rootScope, $routeParams, $location, Global, Transaction, Trans
   $scope.$on('tx', function(event, txid) {
     _findTx(txid);
   });
+
+  if ($routeParams.txId) {
+    _findTx($routeParams.txId);
+  }
 
 });
 

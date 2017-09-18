@@ -25,7 +25,8 @@ angular.module('explorer.search').controller('SearchController',
 
     Block.get({
       blockHash: q
-    }, function() {
+    },
+    function() {
       _resetSearch();
       $location.path('block/' + q);
     }, function() { //block not found, search on TX

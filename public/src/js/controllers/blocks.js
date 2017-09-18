@@ -5,16 +5,19 @@ angular.module('explorer.blocks').controller('BlocksController',
   $scope.global = Global;
   $scope.loading = false;
 
-  if ($routeParams.blockHeight) {
-    BlockByHeight.get({
-      blockHeight: $routeParams.blockHeight
-    }, function(hash) {
-      $location.path('/block/' + hash.blockHash);
-    }, function() {
-      $rootScope.flashMessage = 'Bad Request';
-      $location.path('/');
-    });
-  }
+  $rootScope.$on('Local/SocketChange', function(event) {
+    _init();
+  });
+
+  var _init = function() {
+    if ($routeParams.blockHeight) {
+      $scope.findByHeight();
+    } else if ($routeParams.blockHash) {
+      $scope.findOne();
+    } else {
+      $scope.list();
+    }
+  };
 
   //Datepicker
   var _formatTimestamp = function (date) {
@@ -71,12 +74,24 @@ angular.module('explorer.blocks').controller('BlocksController',
     });
   };
 
+  $scope.findByHeight = function() {
+    BlockByHeight.get({
+      blockHeight: $routeParams.blockHeight
+    }, function(hash) {
+      $location.path('/block/' + hash.blockHash);
+    }, function() {
+      $rootScope.flashMessage = 'Bad Request';
+      $location.path('/');
+    });
+  };
+
   $scope.findOne = function() {
     $scope.loading = true;
 
     Block.get({
       blockHash: $routeParams.blockHash
-    }, function(block) {
+    },
+    function(block) {
       $rootScope.titleDetail = block.height;
       $rootScope.flashMessage = null;
       $scope.loading = false;
@@ -95,6 +110,6 @@ angular.module('explorer.blocks').controller('BlocksController',
     });
   };
 
-  $scope.params = $routeParams;
+  _init();
 
 });

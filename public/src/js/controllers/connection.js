@@ -1,25 +1,52 @@
 'use strict';
 
 angular.module('explorer.connection').controller('ConnectionController',
-  function($scope, $window, Status, getSocket, PeerSync) {
+  function($rootScope, $scope, $timeout, $window, Status, socketService, PeerSync, NodeManager) {
 
     // Set initial values
+    $scope.closeAlert = true;
     $scope.apiOnline = true;
     $scope.serverOnline = true;
-    $scope.clienteOnline = true;
+    $scope.clientOnline = true;
 
-    var socket = getSocket($scope);
+    var socket;
 
-    // Check for the node server connection
-    socket.on('connect', function() {
-      $scope.serverOnline = true;
-      socket.on('disconnect', function() {
-        $scope.serverOnline = false;
+    var _init = function() {
+      socket = socketService.getSocket($scope);
+
+      socket.on('connect', function() {
+        $scope.serverOnline = true;
+        socket.on('disconnect', function() {
+          $scope.serverOnline = false;
+        });
+        _refresh();
       });
+
+      socket.emit('subscribe', 'sync');
+      socket.on('status', function(sync) {
+        $scope.sync = sync;
+        $scope.apiOnline = (sync.status !== 'aborted' && sync.status !== 'error');
+      });
+    };
+
+    var _refresh = function() {
+      $scope.getConnStatus();
+
+      // Auto close alert after a few seconds
+      $scope.closeAlert = false;
+      $timeout(function() {
+        $scope.closeAlert = true;
+      }, 3000);
+    };
+
+    $rootScope.$on('Local/SocketChange', function(event) {
+      _init();
     });
 
     // Check for the  api connection
     $scope.getConnStatus = function() {
+      $scope.connectedNode = NodeManager.getNode();
+
       PeerSync.get({},
         function(peer) {
           $scope.apiOnline = peer.connected;
@@ -29,23 +56,19 @@ angular.module('explorer.connection').controller('ConnectionController',
         });
     };
 
-    socket.emit('subscribe', 'sync');
-    socket.on('status', function(sync) {
-      $scope.sync = sync;
-      $scope.apiOnline = (sync.status !== 'aborted' && sync.status !== 'error');
-    });
-
-    // Check for the client conneciton
+    // Check for the client connection
     $window.addEventListener('offline', function() {
       $scope.$apply(function() {
-        $scope.clienteOnline = false;
+        $scope.clientOnline = false;
       });
     }, true);
 
     $window.addEventListener('online', function() {
       $scope.$apply(function() {
-        $scope.clienteOnline = true;
+        $scope.clientOnline = true;
       });
     }, true);
+
+    _init();
 
   });

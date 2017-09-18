@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('explorer.system').controller('HeaderController',
-  function($scope, $rootScope, $modal, getSocket, Global, Block, NodeManager) {
+  function($scope, $rootScope, $modal, socketService, Global, Block, NodeManager) {
     $scope.global = Global;
+    $rootScope.isCollapsed = true;
 
     $scope.menu = [{
       'title': 'Blocks',
@@ -11,6 +12,23 @@ angular.module('explorer.system').controller('HeaderController',
       'title': 'Status',
       'link': 'status'
     }];
+
+    var socket;
+
+    var _init = function() {
+      socket = socketService.getSocket($scope);
+
+      socket.emit('subscribe', 'inv');
+
+      socket.on('block', function(block) {
+        var blockHash = block.toString();
+        _getBlock(blockHash);
+      });
+    };
+
+    $rootScope.$on('Local/SocketChange', function(event) {
+      _init();
+    });
 
     $scope.openScannerModal = function() {
       var modalInstance = $modal.open({
@@ -22,20 +40,12 @@ angular.module('explorer.system').controller('HeaderController',
     var _getBlock = function(hash) {
       Block.get({
         blockHash: hash
-      }, function(res) {
+      },
+      function(res) {
         $scope.totalBlocks = res.height;
       });
     };
 
-    var socket = getSocket($scope);
-    socket.on('connect', function() {
-      socket.emit('subscribe', 'inv');
+    _init();
 
-      socket.on('block', function(block) {
-        var blockHash = block.toString();
-        _getBlock(blockHash);
-      });
-    });
-
-    $rootScope.isCollapsed = true;
   });
