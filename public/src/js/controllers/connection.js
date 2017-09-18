@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('explorer.connection').controller('ConnectionController',
-  function($rootScope, $scope, $timeout, $window, Status, socketService, PeerSync, NodeManager) {
+  function($rootScope, $scope, $window, Status, socketService, PeerSync, NodeManager) {
 
     // Set initial values
-    $scope.closeAlert = true;
+    $scope.statusUpdate = false;
     $scope.apiOnline = true;
     $scope.serverOnline = true;
     $scope.clientOnline = true;
@@ -31,12 +31,6 @@ angular.module('explorer.connection').controller('ConnectionController',
 
     var _refresh = function() {
       $scope.getConnStatus();
-
-      // Auto close alert after a few seconds
-      $scope.closeAlert = false;
-      $timeout(function() {
-        $scope.closeAlert = true;
-      }, 3000);
     };
 
     $rootScope.$on('Local/SocketChange', function(event) {
@@ -50,6 +44,7 @@ angular.module('explorer.connection').controller('ConnectionController',
       PeerSync.get({},
         function(peer) {
           $scope.apiOnline = peer.connected;
+          $scope.statusUpdate = true;
         },
         function() {
           $scope.apiOnline = false;

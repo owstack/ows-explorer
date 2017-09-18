@@ -92,46 +92,46 @@
       <table class="table" data-ng-controller="StatusController">
         <thead  data-ng-include src="'views/includes/infoStatus.html'"></thead>
         <tbody>
-          <tr>
+          <tr data-ng-show="info.version != undefined">
             <td translate>Version</td>
             <td class="text-right">{{info.version}}</td>
           </tr>
-          <tr>
+          <tr data-ng-show="info.subversion != undefined">
             <td translate>Subversion</td>
             <td class="text-right">
               {{info.subversion.split('/')[1].split('(')[0]}}<br>
               ({{info.subversion.split('(')[1].split(')')[0]}})
             </td>
           </tr>
-          <tr>
+          <tr data-ng-show="info.protocolversion != undefined">
             <td translate>Protocol version</td>
             <td class="text-right">{{info.protocolversion}}</td>
           </tr>
-          <tr>
+          <tr data-ng-show="info.blocks != undefined">
             <td translate>Blocks</td>
             <td class="text-right"><a href="block-index/{{info.blocks}}">{{info.blocks}}</a></td>
           </tr>
-          <tr>
+          <tr data-ng-show="info.timeoffset != undefined">
             <td translate>Time Offset</td>
             <td class="text-right">{{info.timeoffset}}</td>
           </tr>
-          <tr>
+          <tr data-ng-show="info.connections != undefined">
             <td translate>Connections to other nodes</td>
             <td class="text-right">{{info.connections}}</td>
           </tr>
-          <tr>
+          <tr data-ng-show="info.difficulty != undefined">
            <td translate>Mining Difficulty</td>
             <td class="text-right">{{info.difficulty}}</td>
           </tr>
-          <tr>
+          <tr data-ng-show="info.network != undefined">
             <td translate>Network</td>
             <td class="text-right">{{info.network}}</td>
           </tr>
-          <tr>
+          <tr data-ng-show="info.proxy != undefined">
             <td translate>Proxy setting</td>
             <td class="text-right">{{info.proxy}}</td>
           </tr>
-          <tr>
+          <tr data-ng-show="info.errors != undefined">
             <td translate>Info Errors</td>
             <td class="text-right">{{info.errors}}</td>
           </tr>
