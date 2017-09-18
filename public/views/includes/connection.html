@@ -1,10 +1,13 @@
 <div class="connection-status container" data-ng-controller="ConnectionController">
 
-  <div uib-alert class="alert alert-dismissible alert-info" role="alert" ng-hide="closeAlert">
+  <div uib-alert class="alert alert-dismissible alert-info" role="alert" ng-hide="closeInfoAlert" ng-init="closeInfoAlert=true"
+    data-ng-show="statusUpdate">
 
-    <button type="button" class="close" ng-click="closeAlert=true">
+    <button type="button" class="close" ng-click="closeInfoAlert=true; statusUpdate=false;">
       <span>&times;</span>
     </button>
+
+    <strong translate>Info</strong>
 
     <p data-ng-show="connectedNode" translate>
       Connected to the {{connectedNode.info.description.name}} network.
@@ -12,10 +15,10 @@
 
   </div>
 
-  <div class="alert alert-danger" 
+  <div uib-alert class="alert alert-dismissible  alert-danger" role="alert" ng-hide="closeErrorAlert" ng-init="closeErrorAlert=true"
     data-ng-show="!serverOnline || !clientOnline || !apiOnline">
 
-    <button type="button" class="close" ng-click="closeAlert=true">
+    <button type="button" class="close" ng-click="closeErrorAlert=true">
       <span>&times;</span>
     </button>
 
