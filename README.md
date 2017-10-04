@@ -1,6 +1,8 @@
 OWS Explorer
 ======
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/owstack/ows-explorer.svg)](https://greenkeeper.io/)
+
 A blockchain explorer web application service for the following:
 
 - [Bcccore Node](https://github.com/owstack/bcccore-node) using the [Bcccore Explorer API](https://github.com/owstack/bcccore-explorer-api).
