@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-ng-app="explorer" data-ng-csp>
+<html lang="en" data-ng-app="owsExplorerApp" data-ng-csp>
 <head>
   <base href="/" />
 	<meta charset="UTF-8">
@@ -44,9 +44,9 @@
 		<section class="container" data-ng-view></section>
 	</div>
 	<div id="footer" role="navigation">
-    <div class="container" data-ng-controller="FooterController">
+    <div class="container" data-ng-controller="LanguageController">
       <div class="links pull-left">
-        <div class="languages" ng-show="availableLanguages.0">
+        <div class="languages" ng-show="availableLanguages[0]">
           [
           <a href="#"
             ng-click="setLanguage(l.isoCode)"

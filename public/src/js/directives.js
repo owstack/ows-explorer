@@ -2,7 +2,7 @@
 
 var ZeroClipboard = window.ZeroClipboard;
 
-angular.module('explorer')
+angular.module('owsExplorerApp.directives')
   .directive('scroll', function ($window) {
     return function(scope, element, attrs) {
       angular.element($window).bind('scroll', function() {

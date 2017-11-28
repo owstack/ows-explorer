@@ -14,7 +14,7 @@ var ExplorerUI = function(options) {
 
   this.routePrefix = config.routePrefix || pkg.explorerConfig.routePrefix;
   config.fullNodes = config.fullNodes || pkg.explorerConfig.fullNodes;
-  fs.writeFileSync(__dirname + '/../public/js/ows-node-config.js', 'angular.module(\'explorer\').constant(\'nodeConfig\', ' + JSON.stringify(config, null, 2) + ');');
+  fs.writeFileSync(__dirname + '/../public/js/ows-node-config.js', 'angular.module(\'owsExplorerApp\').constant(\'nodeConfig\', ' + JSON.stringify(config, null, 2) + ');');
 };
 
 ExplorerUI.dependencies = [];

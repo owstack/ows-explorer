@@ -77,6 +77,7 @@ module.exports = function(grunt) {
         src: [
           'public/src/js/app.js',
           'public/src/js/controllers/*.js',
+          'public/src/js/models/*.js',
           'public/src/js/services/*.js',
           'public/src/js/directives.js',
           'public/src/js/filters.js',
@@ -168,7 +169,7 @@ module.exports = function(grunt) {
     nggettext_compile: {
       all: {
         options: {
-          module: 'explorer'
+          module: 'owsExplorerApp.translations'
         },
         files: {
           'public/src/js/translations.js': [

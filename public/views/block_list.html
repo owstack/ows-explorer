@@ -34,12 +34,13 @@
           <small><span data-ng-show="!detail" translate>by date</span>{{detail}}{{before}}.</small>
         </h1>
       </div>
-      <table class="table table-hover table-striped">
+      <table class="table table-hover table-striped" style="table-layout: fixed">
         <thead>
           <tr>
             <th translate>Height</th>
             <th translate>Timestamp</th>
-            <th class="text-right" translate>Transactions</th>
+            <th class="text-right hidden-xs" translate>Transactions</th>
+            <th class="text-right hidden-sm hidden-md hidden-lg hidden-xl" translate>Txs</th>
             <th class="text-right hidden-xs" translate>Mined by</th>
             <th class="text-right" translate>Size</th>
           </tr>

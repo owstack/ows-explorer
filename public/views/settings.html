@@ -1,0 +1,39 @@
+<div data-ng-include src="'views/includes/connection.html'"></div>
+<section data-ng-controller="SettingsController">
+  <div class="page-header">
+    <h1 translate>Settings</h1>
+  </div>
+  <div id="status" class="row">
+    <div class="col-xs-12">
+      <h2 translate>Network</h2>
+      <table class="table" style="table-layout: fixed">
+        <tbody>
+          <tr>
+            <td translate>Name</td>
+            <td class="text-right">
+              <span>{{nodeWarning}}</span>
+              <select class="settings-select" ng-model="config.preferredNodeName" ng-change="updateSettings()">
+                <option ng-repeat="n in allNodes" value="{{n.info.description.name}}">{{n.info.description.name}}</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td translate>Currency</td>
+            <td class="text-right">
+              <select class="settings-select" ng-model="config.nodes[config.preferredNodeName].currencyUnitName" ng-change="updateSettings()">
+                <option ng-repeat="unit in getNode(config.preferredNodeName).info.units" value="{{unit.shortName}}">{{unit.shortName}}</option>
+              </select>
+            </td>
+          <tr ng-show="isFiatSelected()">
+            <td translate>Fiat Rate Provider</td>
+            <td class="text-right">
+              <select class="settings-select" ng-model="fiatRateProvider" ng-change="updateSettings()" ng-show="hasFiatRateProviders()">
+                <option ng-repeat="provider in $root.currency.availableFiatRateProviders" value="{{provider}}">{{provider}}</option>
+              </select>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

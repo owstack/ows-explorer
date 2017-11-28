@@ -1,8 +1,6 @@
 'use strict';
 
-var defaultLanguage = localStorage.getItem('explorer-language') || 'en';
-
-angular.module('explorer',[
+var modules = [
   'ngAnimate',
   'ngLodash',
   'ngResource',
@@ -13,27 +11,19 @@ angular.module('explorer',[
   'monospaced.qrcode',
   'gettext',
   'angularMoment',
-  'explorer.system',
-  'explorer.socket',
-  'explorer.api',
-  'explorer.blocks',
-  'explorer.transactions',
-  'explorer.address',
-  'explorer.search',
-  'explorer.status',
-  'explorer.connection',
-  'explorer.currency',
-  'explorer.messages'
-]);
+  'owsExplorerApp.controllers',
+  'owsExplorerApp.directives',
+  'owsExplorerApp.filters',
+  'owsExplorerApp.models',
+  'owsExplorerApp.services',
+  'owsExplorerApp.translations',
+];
 
-angular.module('explorer.system', []);
-angular.module('explorer.socket', []);
-angular.module('explorer.api', []);
-angular.module('explorer.blocks', []);
-angular.module('explorer.transactions', []);
-angular.module('explorer.address', []);
-angular.module('explorer.search', []);
-angular.module('explorer.status', []);
-angular.module('explorer.connection', []);
-angular.module('explorer.currency', []);
-angular.module('explorer.messages', []);
+var owsExplorerApp = angular.module('owsExplorerApp', modules);
+
+angular.module('owsExplorerApp.controllers', []);
+angular.module('owsExplorerApp.directives', []);
+angular.module('owsExplorerApp.filters', []);
+angular.module('owsExplorerApp.models', []);
+angular.module('owsExplorerApp.services', []);
+angular.module('owsExplorerApp.translations', []);

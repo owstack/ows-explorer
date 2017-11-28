@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('explorer')
+angular.module('owsExplorerApp.filters')
   .filter('startFrom', function() {
     return function(input, start) {
       start = +start; //parse to int

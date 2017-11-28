@@ -1,30 +1,30 @@
 'use strict';
 
-angular.module('explorer.address')
-  .factory('Address',
-    function($resource, NodeManager) {
-      var root = {};
+angular.module('owsExplorerApp.services').factory('Address', function($resource, NodeService) {
+  var root = {};
 
-      root.get = function(params, success, error) {
-        var r = $resource(NodeManager.getNode().api + '/addr/:addrStr/?noTxList=1', {addrStr: '@addrStr'}, {
-          get: {
-            method: 'GET',
-            interceptor: {
-              response: function (res) {
-                return res.data;
-              },
-              responseError: function (res) {
-                if (res.status === 404) {
-                  return res;
-                }
+  root.get = function(params, success, error) {
+    NodeService.whenAvailable(function() {
+      var r = $resource(NodeService.getNode().api + '/addr/:addrStr/?noTxList=1', {addrStr: '@addrStr'}, {
+        get: {
+          method: 'GET',
+          interceptor: {
+            response: function (res) {
+              return res.data;
+            },
+            responseError: function (res) {
+              if (res.status === 404) {
+                return res;
               }
             }
           }
-        });
+        }
+      });
 
-        r.get({addrStr: params.addrStr}, success, error);
-      };
+      r.get({addrStr: params.addrStr}, success, error);
+    });
+  };
 
-      return root;
-    }
-  );
+  return root;
+
+});

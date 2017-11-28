@@ -1,13 +1,11 @@
 'use strict';
 
-angular.module('explorer.status').controller('StatusController',
-  function($rootScope, $scope, $routeParams, $location, Global, Status, Sync, socketService, Version) {
-    $scope.global = Global;
-
+angular.module('owsExplorerApp.controllers').controller('StatusController', function($rootScope, $scope, $routeParams, $location, Status, Sync, SocketService, Version) {
     var socket;
 
     var _init = function() {
-      socket = socketService.getSocket($scope);
+      socket = SocketService.getSocket($scope);
+      if (!socket) return;
 
       if (!socket.isConnected()) {
         socket.on('connect', function() {

@@ -1,7 +1,7 @@
 'use strict';
 
 //Setting up route
-angular.module('explorer').config(function($routeProvider) {
+angular.module('owsExplorerApp').config(function($routeProvider) {
   $routeProvider.
     when('/block/:blockHash', {
       templateUrl: 'views/block.html',
@@ -42,6 +42,10 @@ angular.module('explorer').config(function($routeProvider) {
     when('/messages/verify', {
       templateUrl: 'views/messages_verify.html',
       title: 'Verify Message'
+    }).
+    when('/settings', {
+      templateUrl: 'views/settings.html',
+      title: 'Settings'
     })
     .otherwise({
       templateUrl: 'views/404.html',
@@ -50,12 +54,13 @@ angular.module('explorer').config(function($routeProvider) {
 });
 
 //Setting HTML5 Location Mode
-angular.module('explorer')
+angular.module('owsExplorerApp')
   .config(function($locationProvider) {
     $locationProvider.html5Mode(true);
     $locationProvider.hashPrefix('!');
   })
   .run(function($rootScope, $route, $location, $routeParams, $anchorScroll, ngProgress, gettextCatalog, amMoment) {
+    var defaultLanguage = 'en';
     gettextCatalog.currentLanguage = defaultLanguage;
     amMoment.changeLocale(defaultLanguage);
     $rootScope.$on('$routeChangeStart', function() {

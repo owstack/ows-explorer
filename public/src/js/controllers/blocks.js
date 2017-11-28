@@ -1,8 +1,6 @@
 'use strict';
 
-angular.module('explorer.blocks').controller('BlocksController',
-  function($scope, $rootScope, $routeParams, $location, Global, Block, Blocks, BlockByHeight) {
-  $scope.global = Global;
+angular.module('owsExplorerApp.controllers').controller('BlocksController', function($scope, $rootScope, $routeParams, $location, Block, Blocks, BlockByHeight) {
   $scope.loading = false;
 
   $rootScope.$on('Local/SocketChange', function(event) {

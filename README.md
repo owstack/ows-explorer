@@ -18,13 +18,11 @@ Please see the guide at [TBS]() for information about getting a block explorer r
 To manually install all of the necessary components, you can run these commands:
 
 ```bash
-npm install -g btccore-node
-btccore-node create mynode
+npm install -g @owstack/btc-node
+btcnode create mynode
 cd mynode
-btccore-node install bcccore-explorer-api
-btccore-node install btccore-explorer-api
-btccore-node install ows-explorer
-btccore-node start
+btcnode install ows-explorer
+btcnode start
 ```
 
 Open a web browser to `http://localhost:3001/explorer/`

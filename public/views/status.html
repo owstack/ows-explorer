@@ -6,10 +6,10 @@
   <div id="status" class="row">
 
     <div class="col-xs-12 col-md-8">
-      <table class="table" data-ng-show="$root.currency.source">
+      <table class="table" data-ng-show="$root.currency.fiatRateProvider">
         <tbody>
           <tr class="borderless">
-            <td translate>{{$root.currency.shortName}} exchange rate from {{$root.currency.source}}</td>
+            <td translate>{{$root.currency.shortName}} exchange rate from {{$root.currency.fiatRateProvider}}</td>
             <td class="text-right">{{$root.currency.rateStr}}</td>
           </tr>
         </tbody>
@@ -88,7 +88,7 @@
     </div> <!-- END OF COL-8 -->
 
     <div class="col-xs-12 col-md-4 col-gray">
-      <h2 translate>{{$root.node.info.description.name}} node information</h2>
+      <h2 translate>{{$root.node.info.description.name}} Node Information</h2>
       <table class="table" data-ng-controller="StatusController">
         <thead  data-ng-include src="'views/includes/infoStatus.html'"></thead>
         <tbody>
@@ -99,8 +99,10 @@
           <tr data-ng-show="info.subversion != undefined">
             <td translate>Subversion</td>
             <td class="text-right">
-              {{info.subversion.split('/')[1].split('(')[0]}}<br>
-              ({{info.subversion.split('(')[1].split(')')[0]}})
+              <span>{{info.subversion.split('/')[1].split('(')[0]}}</span>
+              <span ng-show="info.subversion.split('(')[1].length > 0">
+                <br>({{info.subversion.split('(')[1].split(')')[0]}})
+              </span>
             </td>
           </tr>
           <tr data-ng-show="info.protocolversion != undefined">

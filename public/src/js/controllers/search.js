@@ -1,8 +1,6 @@
 'use strict';
 
-angular.module('explorer.search').controller('SearchController',
-  function($scope, $routeParams, $location, $timeout, Global, Block, Transaction, Address, BlockByHeight) {
-  $scope.global = Global;
+angular.module('owsExplorerApp.controllers').controller('SearchController', function($scope, $routeParams, $location, $timeout, Block, Transaction, Address, BlockByHeight) {
   $scope.loading = false;
 
   var _badQuery = function() {

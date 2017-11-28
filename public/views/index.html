@@ -1,8 +1,11 @@
-<div class="alert alert-danger" data-ng-show="flashMessage">
-  {{$root.flashMessage}}
-</div>
 <div data-ng-include src="'views/includes/connection.html'"></div>
 <section data-ng-controller="IndexController">
+  <div class="alert alert-danger alert-dismissible" ng-show="flashMessage">
+    <button type="button" class="close" ng-click="closeFlashAlert()">
+      <span>&times;</span>
+    </button>
+    {{$root.flashMessage}}
+  </div>
   <div class="container">
     <div id="home" class="row">
       <div class="col-xs-12 col-md-12">
@@ -15,7 +18,8 @@
             <tr>
               <th translate>Height</th>
               <th translate>Age</th>
-              <th class="text-right"><span class="ellipsis" translate>Transactions</span></th>
+              <th class="text-right hidden-xs" translate>Transactions</th>
+              <th class="text-right hidden-sm hidden-md hidden-lg hidden-xl" translate>Txs</th>
               <th class="text-right hidden-xs"><span class="ellipsis" translate>Mined by</span></th>
               <th class="text-right" translate>Size</th>
             </tr>

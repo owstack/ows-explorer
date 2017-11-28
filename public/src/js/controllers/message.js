@@ -1,12 +1,12 @@
 'use strict';
 
-angular.module('explorer.messages').controller('VerifyMessageController',
-  function($scope, $http, NodeManager) {
+angular.module('owsExplorerApp.controllers').controller('MessageController', function($scope, $http, NodeService) {
   $scope.message = {
     address: '',
     signature: '',
     message: ''
   };
+
   $scope.verification = {
     status: 'unverified',  // ready|loading|verified|error
     result: null,
@@ -19,10 +19,11 @@ angular.module('explorer.messages').controller('VerifyMessageController',
             && $scope.message.signature
             && $scope.message.message);
   };
+
   $scope.verify = function() {
     $scope.verification.status = 'loading';
     $scope.verification.address = $scope.message.address;
-    $http.post(NodeManager.getNode().api + '/messages/verify', $scope.message)
+    $http.post(NodeService.getNode().api + '/messages/verify', $scope.message)
       .success(function(data, status, headers, config) {
         if(typeof(data.result) != 'boolean') {
           // API returned 200 but result was not true or false
@@ -44,7 +45,9 @@ angular.module('explorer.messages').controller('VerifyMessageController',
   var unverify = function() {
     $scope.verification.status = 'unverified';
   };
+
   $scope.$watch('message.address', unverify);
   $scope.$watch('message.signature', unverify);
   $scope.$watch('message.message', unverify);
+
 });
