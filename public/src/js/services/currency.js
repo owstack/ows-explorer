@@ -38,9 +38,6 @@ angular.module('owsExplorerApp.services').factory('CurrencyService', function($r
     // For fiat currencies get the market exchange rate for conversions.
     if ($rootScope.currency.kind == 'fiat') {
       get({}, function(res) {
-/*
- * TODO - uncomment when explorer-api has been upgraded
- * 
         var providerRates = res.data.rates[$rootScope.currency.code];
         $rootScope.currency.availableFiatRateProviders = lodash.map(providerRates, function(p) {
           return p.name;
@@ -51,14 +48,6 @@ angular.module('owsExplorerApp.services').factory('CurrencyService', function($r
         $rootScope.currency.fiatRateProvider = provider;
         $rootScope.currency.value = res.data.rates[$rootScope.currency.code][provider].rate;
 
-        $rootScope.currency.rateStr = '1 ' + $rootScope.currency.standardUnit.shortName + ' = ' +
-          $rootScope.currency.value.toFixed($rootScope.currency.decimals) + ' ' + $rootScope.currency.shortName;
-*/
-        $rootScope.currency.availableFiatRateProviders = [res.data.rates[$rootScope.currency.code].name];
-
-        $rootScope.currency.value = res.data.rates[$rootScope.currency.code].rate;
-        // Exchange rate status info.
-        $rootScope.currency.fiatRateProvider = res.data.rates[$rootScope.currency.code].name;
         $rootScope.currency.rateStr = '1 ' + $rootScope.currency.standardUnit.shortName + ' = ' +
           $rootScope.currency.value.toFixed($rootScope.currency.decimals) + ' ' + $rootScope.currency.shortName;
       });
