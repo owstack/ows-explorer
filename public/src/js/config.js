@@ -12,7 +12,7 @@ angular.module('owsExplorerApp').config(function($routeProvider) {
       templateUrl: 'views/redirect.html'
     }).
     when('/tx/send', {
-      templateUrl: 'views/transaction_sendraw.html',
+      templateUrl: 'views/transaction-sendraw.html',
       title: 'Broadcast Raw Transaction'
     }).
     when('/tx/:txId/:v_type?/:v_index?', {
@@ -24,11 +24,11 @@ angular.module('owsExplorerApp').config(function($routeProvider) {
       title: 'Home'
     }).
     when('/blocks', {
-      templateUrl: 'views/block_list.html',
+      templateUrl: 'views/block-list.html',
       title: 'Blocks solved Today'
     }).
     when('/blocks-date/:blockDate/:startTimestamp?', {
-      templateUrl: 'views/block_list.html',
+      templateUrl: 'views/block-list.html',
       title: 'Blocks solved '
     }).
     when('/address/:addrStr', {
@@ -40,7 +40,7 @@ angular.module('owsExplorerApp').config(function($routeProvider) {
       title: 'Status'
     }).
     when('/messages/verify', {
-      templateUrl: 'views/messages_verify.html',
+      templateUrl: 'views/messages-verify.html',
       title: 'Verify Message'
     }).
     when('/settings', {

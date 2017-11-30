@@ -8,7 +8,7 @@ angular.module('owsExplorerApp.controllers').controller('SettingsController', fu
 
   var init = function(nodeName) {
     $scope.config = ConfigService.getConfig();
-    $scope.allNodes = NodeService.getNodes();
+    $scope.nodes = NodeService.getAvailableNodes();
 
     $scope.nodeWarning = null;
     if (!NodeService.isNodeAvailable($scope.config.preferredNodeName)) {
@@ -16,8 +16,14 @@ angular.module('owsExplorerApp.controllers').controller('SettingsController', fu
     }
   };
 
-  $scope.getNode = function(nodeName) {
-    return NodeService.getNodeByName(nodeName);
+  $scope.getNodeUnits = function(nodeName) {
+    var node = NodeService.getNodeByName(nodeName);
+    if (!node) return [];
+
+    // TODO: exclude selection of fiat currencies for now; service needs historical rates.
+    return lodash.filter(node.info.units, function(u) {
+      return u.kind != 'fiat';
+    });
   };
 
   $scope.isFiatSelected = function() {

@@ -1,0 +1,33 @@
+<h1>
+  <div class="row">
+    <div class="col-xs-12 col-sm-6">
+      <span translate="">Blocks On </span>
+      <small class="text-muted" data-ng-if="!pagination.current" translate>loading...</small>
+      <span data-ng-show="pagination.current">
+        <small>
+          <!-- desktop date picker -->
+          <span class="hidden-xs">
+            {{pagination.current}} UTC
+            <a href="#" class="btn btn-primary btn-sm datepicker-bs" uib-datepicker-popup popup-placement="bottom-left" show-button-bar="false" data-ng-click="openCalendar($event)"
+              data-ng-model="calendar.dt" is-open="calendar.open" data-ng-required="true">
+              <span class="glyphicon glyphicon-calendar"></span>
+            </a>
+          </span>
+          <!-- native date picker -->
+          <span class="visible-xs-inline-block">
+            <input type="date" class="datepicker-native" data-ng-model="calendar.dt" data-ng-required="true">
+              <span class="datepicker-native-utc">UTC</span>
+            </input>
+          </span>
+        </small>
+      </span>
+      <span>{{before}}</span>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+      <div class="block-pagination" data-ng-if="pagination.current">
+        <a class="btn btn-primary btn-sm pager-left" href="blocks-date/{{pagination.prev}}">&larr; {{pagination.prev}}</a>
+        <a class="btn btn-primary btn-sm pager-right" href="blocks-date/{{pagination.next}}" data-ng-show="!pagination.isToday">{{pagination.next}} &rarr;</a>
+      </div>
+    </div>
+  </div>
+</h1>

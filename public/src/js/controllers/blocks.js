@@ -1,7 +1,10 @@
 'use strict';
 
-angular.module('owsExplorerApp.controllers').controller('BlocksController', function($scope, $rootScope, $routeParams, $location, Block, Blocks, BlockByHeight) {
+angular.module('owsExplorerApp.controllers').controller('BlocksController', function($timeout, $scope, $rootScope, $routeParams, $location, Block, Blocks, BlockByHeight) {
   $scope.loading = false;
+  $scope.calendar = {
+    open: false
+  };
 
   $rootScope.$on('Local/SocketChange', function(event) {
     _init();
@@ -26,7 +29,7 @@ angular.module('owsExplorerApp.controllers').controller('BlocksController', func
     return yyyy + '-' + (mm[1] ? mm : '0' + mm[0]) + '-' + (dd[1] ? dd : '0' + dd[0]); //padding
   };
 
-  $scope.$watch('dt', function(newValue, oldValue) {
+  $scope.$watch('calendar.dt', function(newValue, oldValue) {
     if (newValue !== oldValue) {
       $location.path('/blocks-date/' + _formatTimestamp(newValue));
     }
@@ -35,8 +38,7 @@ angular.module('owsExplorerApp.controllers').controller('BlocksController', func
   $scope.openCalendar = function($event) {
     $event.preventDefault();
     $event.stopPropagation();
-
-    $scope.opened = true;
+    $scope.calendar.open = true;
   };
 
   $scope.humanSince = function(time) {
@@ -45,12 +47,14 @@ angular.module('owsExplorerApp.controllers').controller('BlocksController', func
     return m.max().from(b);
   };
 
-
   $scope.list = function() {
     $scope.loading = true;
 
     if ($routeParams.blockDate) {
-      $scope.detail = 'on ' + $routeParams.blockDate;
+      var parts = $routeParams.blockDate.split('-');
+      $scope.calendar.dt = new Date(parts[0], parts[1]-1, parts[2]); 
+    } else {
+      $scope.calendar.dt = new Date();
     }
 
     if ($routeParams.startTimestamp) {
@@ -59,8 +63,6 @@ angular.module('owsExplorerApp.controllers').controller('BlocksController', func
       if (m<10) m = '0' + m;
       $scope.before = ' before ' + d.getHours() + ':' + m;
     }
-
-    $rootScope.titleDetail = $scope.detail;
 
     Blocks.get({
       blockDate: $routeParams.blockDate,

@@ -10,10 +10,12 @@ angular.module('owsExplorerApp.services').factory('ConfigService', function($roo
   //   preferredNodeName = 'Bitcoin',
   //   nodes: {
   //     'Bitcoin': {
-  //       currencyUnit: 'BTC'
+  //       currencyUnit: 'BTC',
+  //       fiatRateProvider: 'Bitstamp'
   //     },
   //     'Bitcoin Cash': {
-  //       currencyUnit: 'bits'
+  //       currencyUnit: 'bits',
+  //       fiatRateProvider: 'Kraken'
   //     },
   //     ...
   //   }

@@ -3,7 +3,7 @@
 angular.module('owsExplorerApp.controllers').controller('ConnectionController', function($rootScope, $scope, $window, Status, SocketService, PeerSync, NodeService) {
   // Set initial values
   $scope.statusUpdate = false;
-  $scope.errorDismissed = false;
+  $scope.errorAlertDismissed = false;
   $scope.apiOnline = true;
   $scope.serverOnline = true;
   $scope.clientOnline = true;
@@ -18,7 +18,7 @@ angular.module('owsExplorerApp.controllers').controller('ConnectionController', 
       $scope.serverOnline = true;
       socket.on('disconnect', function() {
         $scope.serverOnline = false;
-        $scope.errorDismissed = false;
+        $scope.errorAlertDismissed = false;
       });
       _refresh();
     });
@@ -39,7 +39,7 @@ angular.module('owsExplorerApp.controllers').controller('ConnectionController', 
   });
 
   $scope.closeErrorAlert = function() {
-    $scope.errorDismissed = true;
+    $scope.errorAlertDismissed = true;
   };
 
   $scope.closeInfoAlert = function() {
@@ -57,7 +57,7 @@ angular.module('owsExplorerApp.controllers').controller('ConnectionController', 
       },
       function() {
         $scope.apiOnline = false;
-        $scope.errorDismissed = false;
+        $scope.errorAlertDismissed = false;
       });
   };
 
@@ -65,13 +65,14 @@ angular.module('owsExplorerApp.controllers').controller('ConnectionController', 
   $window.addEventListener('offline', function() {
     $scope.$apply(function() {
       $scope.clientOnline = false;
-      $scope.errorDismissed = false;
+      $scope.errorAlertDismissed = false;
     });
   }, true);
 
   $window.addEventListener('online', function() {
     $scope.$apply(function() {
       $scope.clientOnline = true;
+      $scope.statusUpdate = true;
     });
   }, true);
 

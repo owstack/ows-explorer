@@ -1,0 +1,50 @@
+<div data-ng-include src="'views/includes/connection.html'"></div>
+<section data-ng-controller="BlocksController">
+  <div class="secondary_navbar xhidden-xs xhidden-sm" scroll data-ng-class="{'hidden': !secondaryNavbar}" data-ng-init="hideSNavbar=0">
+    <div class="container" data-ng-show="!hideSNavbar">
+      <div data-ng-include src="'views/includes/block-list-header.html'"></div>
+    </div>
+    <div class="hide_snavbar">
+      <a data-ng-click="hideSNavbar=!hideSNavbar">
+        <span data-ng-show="hideSNavbar"><span class="text-muted glyphicon glyphicon-chevron-down"></span></span>
+        <span data-ng-show="!hideSNavbar"><span class="text-muted glyphicon glyphicon-chevron-up"></span></span>
+      </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="page-header">
+        <div data-ng-include src="'views/includes/block-list-header.html'"></div>
+      </div>
+      <table class="table table-hover table-striped" style="table-layout: fixed">
+        <thead>
+          <tr>
+            <th translate>Height</th>
+            <th translate>Timestamp</th>
+            <th class="text-right" translate>Transactions</th>
+            <th class="text-right hidden-xs" translate>Mined by</th>
+            <th class="text-right" translate>Size</th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr data-ng-show="loading">
+          <td colspan="5"><span translate>Waiting for blocks...</span> <span class="loader-gif"></span></td>
+        </tr>
+        <tr class="fader" data-ng-repeat='b in blocks'>
+          <td><a href="block/{{b.hash}}">{{b.height}}</a></td>
+          <td>{{b.time * 1000 | date:'medium'}}</td>
+          <td class="text-right">{{b.txlength}}</td>
+          <td class="text-right hidden-xs"><a href="{{b.poolInfo.url}}" title="{{b.poolInfo.poolName}}" target="_blank" data-ng-show="b.poolInfo">{{b.poolInfo.poolName}}</a></td>
+          <td class="text-right">{{b.size}}</td>
+        </tr>
+        </tbody>
+      </table>
+      <div data-ng-if="pagination.more">
+        <a class="btn btn-primary" href="blocks-date/{{pagination.current}}" data-ng-show="{{before}}">Lastest block from date</a>
+        <a class="btn btn-primary" href="blocks-date/{{pagination.current}}/{{pagination.moreTs}}">Older blocks from this date</a>
+      </div>
+    </div>
+  </div>
+  <h2 class="text-center text-muted" data-ng-show="!blocks.length && !loading"
+    translate>No blocks yet.</h2>
+</section>
