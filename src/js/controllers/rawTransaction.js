@@ -16,7 +16,7 @@ angular.module('owsExplorerApp.controllers').controller('RawTransactionControlle
     };
     $scope.status = 'loading';
     $http.post(NodeService.getNode().api + '/tx/send', postData)
-      .success(function(data, status, headers, config) {
+      .then(function(data, status, headers, config) {
         if(typeof(data.txid) != 'string') {
           // API returned 200 but the format is not known
           $scope.status = 'error';
@@ -26,8 +26,7 @@ angular.module('owsExplorerApp.controllers').controller('RawTransactionControlle
 
         $scope.status = 'sent';
         $scope.txid = data.txid;
-      })
-      .error(function(data, status, headers, config) {
+      }, function(data, status, headers, config) {
         $scope.status = 'error';
         if(data) {
           $scope.error = data;

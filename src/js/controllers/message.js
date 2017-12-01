@@ -24,7 +24,7 @@ angular.module('owsExplorerApp.controllers').controller('MessageController', fun
     $scope.verification.status = 'loading';
     $scope.verification.address = $scope.message.address;
     $http.post(NodeService.getNode().api + '/messages/verify', $scope.message)
-      .success(function(data, status, headers, config) {
+      .then(function(data, status, headers, config) {
         if(typeof(data.result) != 'boolean') {
           // API returned 200 but result was not true or false
           $scope.verification.status = 'error';
@@ -34,8 +34,7 @@ angular.module('owsExplorerApp.controllers').controller('MessageController', fun
 
         $scope.verification.status = 'verified';
         $scope.verification.result = data.result;
-      })
-      .error(function(data, status, headers, config) {
+      }, function(data, status, headers, config) {
         $scope.verification.status = 'error';
         $scope.verification.error = data;
       });

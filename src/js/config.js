@@ -43,6 +43,10 @@ angular.module('owsExplorerApp').config(function($routeProvider) {
       templateUrl: 'views/messages-verify.html',
       title: 'Verify Message'
     }).
+    when('/tools', {
+      templateUrl: 'views/tools.html',
+      title: 'Tools'
+    }).
     when('/settings', {
       templateUrl: 'views/settings.html',
       title: 'Settings'

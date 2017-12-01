@@ -31,25 +31,25 @@ module.exports = function(grunt) {
       },
       vendors: {
         src: [
-          'www/src/js/ios-imagefile-megapixel/megapix-image.js',
+          'src/js/ios-imagefile-megapixel/megapix-image.js',
           'bower_components/qrcode-generator/js/qrcode.js',
-          'www/src/js/jsqrcode/grid.js',
-          'www/src/js/jsqrcode/version.js',
-          'www/src/js/jsqrcode/detector.js',
-          'www/src/js/jsqrcode/formatinf.js',
-          'www/src/js/jsqrcode/errorlevel.js',
-          'www/src/js/jsqrcode/bitmat.js',
-          'www/src/js/jsqrcode/datablock.js',
-          'www/src/js/jsqrcode/bmparser.js',
-          'www/src/js/jsqrcode/datamask.js',
-          'www/src/js/jsqrcode/rsdecoder.js',
-          'www/src/js/jsqrcode/gf256poly.js',
-          'www/src/js/jsqrcode/gf256.js',
-          'www/src/js/jsqrcode/decoder.js',
-          'www/src/js/jsqrcode/qrcode.js',
-          'www/src/js/jsqrcode/findpat.js',
-          'www/src/js/jsqrcode/alignpat.js',
-          'www/src/js/jsqrcode/databr.js',
+          'src/js/jsqrcode/grid.js',
+          'src/js/jsqrcode/version.js',
+          'src/js/jsqrcode/detector.js',
+          'src/js/jsqrcode/formatinf.js',
+          'src/js/jsqrcode/errorlevel.js',
+          'src/js/jsqrcode/bitmat.js',
+          'src/js/jsqrcode/datablock.js',
+          'src/js/jsqrcode/bmparser.js',
+          'src/js/jsqrcode/datamask.js',
+          'src/js/jsqrcode/rsdecoder.js',
+          'src/js/jsqrcode/gf256poly.js',
+          'src/js/jsqrcode/gf256.js',
+          'src/js/jsqrcode/decoder.js',
+          'src/js/jsqrcode/qrcode.js',
+          'src/js/jsqrcode/findpat.js',
+          'src/js/jsqrcode/alignpat.js',
+          'src/js/jsqrcode/databr.js',
           'bower_components/momentjs/min/moment.min.js',
           'bower_components/moment/lang/es.js',
           'bower_components/zeroclipboard/ZeroClipboard.min.js'
@@ -74,23 +74,23 @@ module.exports = function(grunt) {
       },
       main: {
         src: [
-          'www/src/js/app.js',
-          'www/src/js/controllers/*.js',
-          'www/src/js/models/*.js',
-          'www/src/js/services/*.js',
-          'www/src/js/directives.js',
-          'www/src/js/filters.js',
-          'www/src/js/config.js',
-          'www/src/js/config-node.js',
-          'www/src/js/init.js',
-          'www/src/js/translations.js'
+          'src/js/app.js',
+          'src/js/controllers/*.js',
+          'src/js/models/*.js',
+          'src/js/services/*.js',
+          'src/js/directives.js',
+          'src/js/filters.js',
+          'src/js/config.js',
+          'src/js/config-node.js',
+          'src/js/init.js',
+          'src/js/translations.js'
         ],
         dest: 'www/js/main.js'
       },
       css: {
         src: [
           'bower_components/bootstrap/dist/css/bootstrap.min.css',
-          'www/src/css/**/*.css'
+          'src/css/**/*.css'
         ],
         dest: 'www/css/main.css'
       }
@@ -147,11 +147,11 @@ module.exports = function(grunt) {
     },
     watch: {
       main: {
-        files: ['www/src/js/**/*.js'],
+        files: ['src/js/**/*.js'],
         tasks: ['concat:main', 'uglify:main'],
       },
       css: {
-        files: ['www/src/css/**/*.css'],
+        files: ['src/css/**/*.css'],
         tasks: ['concat:css', 'cssmin'],
       },
     },
@@ -171,7 +171,7 @@ module.exports = function(grunt) {
           module: 'owsExplorerApp.translations'
         },
         files: {
-          'www/src/js/translations.js': [
+          'src/js/translations.js': [
             'po/*.po'
           ]
         }

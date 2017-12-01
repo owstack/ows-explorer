@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('owsExplorerApp.controllers').controller('SettingsController', function($rootScope, $scope, $timeout, lodash, gettextCatalog, ConfigService, NodeService, CurrencyService) {
+angular.module('owsExplorerApp.controllers').controller('SettingsController', function($rootScope, $scope, $timeout, $route, $templateCache, gettextCatalog, amMoment, lodash, gettextCatalog, ConfigService, NodeService, CurrencyService) {
 
   $rootScope.$on('Local/NodeConnected', function(e, node) {
     init();
@@ -14,6 +14,30 @@ angular.module('owsExplorerApp.controllers').controller('SettingsController', fu
     if (!NodeService.isNodeAvailable($scope.config.preferredNodeName)) {
       $scope.nodeWarning = gettextCatalog.getString('Offline');
     }
+
+    $scope.defaultLanguage = $scope.config.language || 'en';
+    $scope.availableLanguages = [{
+      name: 'Deutsch',
+      isoCode: 'de_DE',
+    }, {
+      name: 'English',
+      isoCode: 'en',
+    }, {
+      name: 'Spanish',
+      isoCode: 'es',
+    }, {
+      name: 'Japanese',
+      isoCode: 'ja',
+    }];
+  };
+
+  var setLanguage = function(isoCode) {
+    gettextCatalog.currentLanguage = $scope.defaultLanguage = isoCode;
+    amMoment.changeLocale(isoCode);
+
+    var currentPageTemplate = $route.current.templateUrl;
+    $templateCache.remove(currentPageTemplate);
+    $route.reload();
   };
 
   $scope.getNodeUnits = function(nodeName) {
@@ -41,10 +65,16 @@ angular.module('owsExplorerApp.controllers').controller('SettingsController', fu
   };
 
   $scope.updateSettings = function() {
+    var oldConfig = ConfigService.getConfig();
     ConfigService.saveConfig($scope.config, true);
 
-    // Set the current node.
-    NodeService.setNode($scope.config.preferredNodeName);
+    if ($scope.config.language != oldConfig.language) {
+      setLanguage($scope.config.language);
+    }
+
+    if ($scope.config.preferredNodeName != oldConfig.preferredNodeName) {
+      NodeService.setNode($scope.config.preferredNodeName);
+    }
   };
 
   // Come back to update config and UI if fiat currency is selected; setting of the currency.fiatRateProvider is async.

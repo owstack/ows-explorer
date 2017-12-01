@@ -269,6 +269,14 @@ margin-left: 0;
   padding-left: 0;
 }
 
+.nav-tabs>li>a {
+  color: #555;
+}
+
+.nav-tabs>li.active>a {
+  color: #00afff;
+}
+
 .nav-tabs.nav-justified>li>a:hover {
   cursor: pointer;
 }
@@ -567,12 +575,12 @@ margin-left: 0;
 }
 
 #footer .links {
-  color: #ddd;
+  color: #808080;
   font-size: 10px;
 }
 
 #footer .links a {
-  color: #ddd;
+  color: #ccc;
 }
 
 #footer .links a.selected {
@@ -737,55 +745,6 @@ input[type='date']:focus {
   top: 0;
   width: 100%;
   z-index: -9999;
-}
-
-.badge {
-  -moz-border-radius: 9px;
-  -webkit-border-radius: 9px;
-  background-color: #999999;
-  border-radius: 9px;
-  color: #ffffff;
-  font-size: 12.025px;
-  font-weight: bold;
-  padding: 1px 9px 2px;
-  white-space: nowrap;
-}
-
-.badge:hover {
-  color: #ffffff;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.badge-error {
-  background-color: #b94a48;
-}
-.badge-error:hover {
-  background-color: #953b39;
-}
-.badge-warning {
-  background-color: #f89406;
-}
-.badge-warning:hover {
-  background-color: #c67605;
-}
-.badge-success {
-  background-color: #468847;
-}
-.badge-success:hover {
-  background-color: #356635;
-}
-.badge-info {
-  background-color: #3a87ad;
-}
-.badge-info:hover {
-  background-color: #2d6987;
-}
-.badge-inverse {
-  background-color: #000000;
-}
-.badge-inverse:hover {
-  background-color: #1a1a1a;
 }
 
 .status .t {
@@ -964,7 +923,7 @@ a.v_highlight_more {
 
 @media (max-width: 991px) {
   .navbar-form {
-    width: 63%;
+    width: 50%;
   }
   .navbar-form .form-control {
     width: 100%;
@@ -1123,9 +1082,6 @@ a.v_highlight_more {
   .btn-expand {
     font-size: 18px;
   }
-  #footer .links {
-    font-size: 14px;
-  }
   .btn-settings {
     padding: 0.5px 12px;
     font-size: inherit;
@@ -1155,7 +1111,7 @@ a.v_highlight_more {
 
 @media (min-width: 991px) {
   .navbar-form {
-    width: 65%;
+    width: 52%;
   }
 }
 
@@ -1164,7 +1120,7 @@ a.v_highlight_more {
     width: 280px;
   }
   .navbar-form {
-    width: 71%;
+    width: 60%;
   }
   .navbar-form .form-control {
     width: 100%;
