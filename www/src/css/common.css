@@ -274,7 +274,7 @@ margin-left: 0;
 }
 
 .explorer {
-  background-image: url(../img/logo-dark-bg.svg);
+  background-image: url(../img/r/logo.svg);
   background-size: contain;
   background-repeat: no-repeat;
   position: absolute;
@@ -829,7 +829,7 @@ input[type='date']:focus {
 }
 
 .btn-copy {
-  background: transparent url('../img/icons/copy.png') center center no-repeat;
+  background: transparent url('../img/copy.png') center center no-repeat;
 }
 
 .btn-copy .tooltip {
@@ -874,7 +874,7 @@ input[type='date']:focus {
 
 /* Index */
 #home .btn-more {
-  border-top: 1px solid #004666;
+  border-top: 1px solid #dddddd;
   margin: 30px auto 0;
   text-align: center;
   width: 90%;
@@ -1055,7 +1055,7 @@ a.v_highlight_more {
     font-size: 20px;
   }
   .explorer {
-    background-image: url(../img/logo-dark-bg-sm.svg);
+    background-image: url(../img/r/logo-sm.svg);
     top: 12px;
     left: 15px;
     height: 100%;

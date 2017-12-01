@@ -37,12 +37,15 @@ db/blocks
 db/testnet/blocks/*
 db/testnet/blocks
 
-public/js/angularjs-all.js
-public/js/main.js
-public/js/vendors.js
-public/js/ows-node-config.js
+www/js/angularjs-all.js
+www/js/main.js
+www/js/vendors.js
+www/js/ows-node-config.js
 
-public/css/main.css
+www/css/main.css
+
+www/img/r
+resources
 
 README.html
 po/*

@@ -14,7 +14,7 @@ var ExplorerUI = function(options) {
 
   this.routePrefix = config.routePrefix || pkg.explorerConfig.routePrefix;
   config.fullNodes = config.fullNodes || pkg.explorerConfig.fullNodes;
-  fs.writeFileSync(__dirname + '/../public/js/ows-node-config.js', 'angular.module(\'owsExplorerApp\').constant(\'nodeConfig\', ' + JSON.stringify(config, null, 2) + ');');
+  fs.writeFileSync(__dirname + '/../www/js/ows-node-config.js', 'angular.module(\'owsExplorerApp\').constant(\'nodeConfig\', ' + JSON.stringify(config, null, 2) + ');');
 };
 
 ExplorerUI.dependencies = [];
@@ -22,7 +22,7 @@ ExplorerUI.dependencies = [];
 inherits(ExplorerUI, BaseService);
 
 ExplorerUI.prototype.start = function(callback) {
-  this.indexFile = this.filterIndexHTML(fs.readFileSync(__dirname + '/../public/index-template.html', {encoding: 'utf8'}));
+  this.indexFile = this.filterIndexHTML(fs.readFileSync(__dirname + '/../www/index-template.html', {encoding: 'utf8'}));
   setImmediate(callback);
 };
 
@@ -32,7 +32,7 @@ ExplorerUI.prototype.getRoutePrefix = function() {
 
 ExplorerUI.prototype.setupRoutes = function(app, express) {
   var self = this;
-  app.use(express.static(__dirname + '/../public'));
+  app.use(express.static(__dirname + '/../www'));
   // if not in found, fall back to indexFile (404 is handled client-side)
   app.use(function(req, res, next) {
     res.setHeader('Content-Type', 'text/html');

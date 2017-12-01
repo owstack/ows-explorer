@@ -31,30 +31,30 @@ module.exports = function(grunt) {
       },
       vendors: {
         src: [
-          'public/src/js/ios-imagefile-megapixel/megapix-image.js',
+          'www/src/js/ios-imagefile-megapixel/megapix-image.js',
           'bower_components/qrcode-generator/js/qrcode.js',
-          'public/src/js/jsqrcode/grid.js',
-          'public/src/js/jsqrcode/version.js',
-          'public/src/js/jsqrcode/detector.js',
-          'public/src/js/jsqrcode/formatinf.js',
-          'public/src/js/jsqrcode/errorlevel.js',
-          'public/src/js/jsqrcode/bitmat.js',
-          'public/src/js/jsqrcode/datablock.js',
-          'public/src/js/jsqrcode/bmparser.js',
-          'public/src/js/jsqrcode/datamask.js',
-          'public/src/js/jsqrcode/rsdecoder.js',
-          'public/src/js/jsqrcode/gf256poly.js',
-          'public/src/js/jsqrcode/gf256.js',
-          'public/src/js/jsqrcode/decoder.js',
-          'public/src/js/jsqrcode/qrcode.js',
-          'public/src/js/jsqrcode/findpat.js',
-          'public/src/js/jsqrcode/alignpat.js',
-          'public/src/js/jsqrcode/databr.js',
+          'www/src/js/jsqrcode/grid.js',
+          'www/src/js/jsqrcode/version.js',
+          'www/src/js/jsqrcode/detector.js',
+          'www/src/js/jsqrcode/formatinf.js',
+          'www/src/js/jsqrcode/errorlevel.js',
+          'www/src/js/jsqrcode/bitmat.js',
+          'www/src/js/jsqrcode/datablock.js',
+          'www/src/js/jsqrcode/bmparser.js',
+          'www/src/js/jsqrcode/datamask.js',
+          'www/src/js/jsqrcode/rsdecoder.js',
+          'www/src/js/jsqrcode/gf256poly.js',
+          'www/src/js/jsqrcode/gf256.js',
+          'www/src/js/jsqrcode/decoder.js',
+          'www/src/js/jsqrcode/qrcode.js',
+          'www/src/js/jsqrcode/findpat.js',
+          'www/src/js/jsqrcode/alignpat.js',
+          'www/src/js/jsqrcode/databr.js',
           'bower_components/momentjs/min/moment.min.js',
           'bower_components/moment/lang/es.js',
           'bower_components/zeroclipboard/ZeroClipboard.min.js'
         ],
-        dest: 'public/js/vendors.js'
+        dest: 'www/js/vendors.js'
       },
       angular: {
         src: [
@@ -70,29 +70,29 @@ module.exports = function(grunt) {
           'bower_components/angular-moment/angular-moment.min.js',
           'bower_components/ng-lodash/build/ng-lodash.min.js'
         ],
-        dest: 'public/js/angularjs-all.js'
+        dest: 'www/js/angularjs-all.js'
       },
       main: {
         src: [
-          'public/src/js/app.js',
-          'public/src/js/controllers/*.js',
-          'public/src/js/models/*.js',
-          'public/src/js/services/*.js',
-          'public/src/js/directives.js',
-          'public/src/js/filters.js',
-          'public/src/js/config.js',
-          'public/src/js/config-node.js',
-          'public/src/js/init.js',
-          'public/src/js/translations.js'
+          'www/src/js/app.js',
+          'www/src/js/controllers/*.js',
+          'www/src/js/models/*.js',
+          'www/src/js/services/*.js',
+          'www/src/js/directives.js',
+          'www/src/js/filters.js',
+          'www/src/js/config.js',
+          'www/src/js/config-node.js',
+          'www/src/js/init.js',
+          'www/src/js/translations.js'
         ],
-        dest: 'public/js/main.js'
+        dest: 'www/js/main.js'
       },
       css: {
         src: [
           'bower_components/bootstrap/dist/css/bootstrap.min.css',
-          'public/src/css/**/*.css'
+          'www/src/css/**/*.css'
         ],
-        dest: 'public/css/main.css'
+        dest: 'www/css/main.css'
       }
     },
     copy: {
@@ -100,7 +100,7 @@ module.exports = function(grunt) {
         expand: true,
         flatten: true,
         src: 'bower_components/zeroclipboard/ZeroClipboard.swf',
-        dest: 'public/lib/zeroclipboard/'
+        dest: 'www/lib/zeroclipboard/'
       }
     },
     uglify: {
@@ -109,22 +109,22 @@ module.exports = function(grunt) {
         mangle: false
       },
       vendors: {
-        src: 'public/js/vendors.js',
-        dest: 'public/js/vendors.min.js'
+        src: 'www/js/vendors.js',
+        dest: 'www/js/vendors.min.js'
       },
       angular: {
-        src: 'public/js/angularjs-all.js',
-        dest: 'public/js/angularjs-all.min.js'
+        src: 'www/js/angularjs-all.js',
+        dest: 'www/js/angularjs-all.min.js'
       },
       main: {
-        src: 'public/js/main.js',
-        dest: 'public/js/main.min.js'
+        src: 'www/js/main.js',
+        dest: 'www/js/main.min.js'
       }
     },
     cssmin: {
       css: {
-        src: 'public/css/main.css',
-        dest: 'public/css/main.min.css'
+        src: 'www/css/main.css',
+        dest: 'www/css/main.min.css'
       }
     },
     markdown: {
@@ -147,11 +147,11 @@ module.exports = function(grunt) {
     },
     watch: {
       main: {
-        files: ['public/src/js/**/*.js'],
+        files: ['www/src/js/**/*.js'],
         tasks: ['concat:main', 'uglify:main'],
       },
       css: {
-        files: ['public/src/css/**/*.css'],
+        files: ['www/src/css/**/*.css'],
         tasks: ['concat:css', 'cssmin'],
       },
     },
@@ -159,8 +159,8 @@ module.exports = function(grunt) {
       pot: {
         files: {
           'po/template.pot': [
-            'public/views/*.html',
-            'public/views/**/*.html'
+            'www/views/*.html',
+            'www/views/**/*.html'
           ]
         }
       },
@@ -171,7 +171,7 @@ module.exports = function(grunt) {
           module: 'owsExplorerApp.translations'
         },
         files: {
-          'public/src/js/translations.js': [
+          'www/src/js/translations.js': [
             'po/*.po'
           ]
         }

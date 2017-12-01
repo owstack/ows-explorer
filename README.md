@@ -3,15 +3,15 @@ OWS Explorer
 
 A blockchain explorer web application service for the following:
 
-- [Bcccore Node](https://github.com/owstack/bcccore-node) using the [Bcccore Explorer API](https://github.com/owstack/bcccore-explorer-api).
-- [Btccore Node](https://github.com/owstack/btccore-node) using the [Btccore Explorer API](https://github.com/owstack/btccore-explorer-api).
+- [Bch Node](https://github.com/owstack/bch-node) using the [Bch Explorer API](https://github.com/owstack/bch-explorer-api).
+- [Btc Node](https://github.com/owstack/btc-node) using the [Btc Explorer API](https://github.com/owstack/btc-explorer-api).
 
 ## Quick Start
 
 Please see the guide at [TBS]() for information about getting a block explorer running. This is only the front-end component of the block explorer, and is packaged together with all of the necessary components in the following:
 
-- [Bcccore](https://github.com/owstack/bcccore)
-- [Btccore](https://github.com/owstack/btccore)
+- [Bch](https://github.com/owstack/bch)
+- [Btc](https://github.com/owstack/btc)
 
 ## Getting Started
 
@@ -57,7 +57,7 @@ By default, the `explorerConfig` in `package.json` is as follows.  The explorer 
   }
 ```
 
-To change these settings configure your OWS node (e.g., see `~./btccore-node.json` on your OWS node host).  The following will connect the explorer to a remote node for blockchain data.
+To change these settings configure your OWS node (e.g., see `~./btc-node.json` on your OWS node host).  The following will connect the explorer to a remote node for blockchain data.
 
 ```json
 {
@@ -123,7 +123,7 @@ This action will create a template.pot file in ***po/*** folder. You can open it
 
 If you make new changes, simply run **grunt compile** again to generate a new .pot template and the angular javascript ***js/translations.js***. Then (if use Poedit), open .po file and choose ***update from POT File*** from **Catalog** menu.
 
-Finally changes your default language from ***public/src/js/config***
+Finally changes your default language from ***www/src/js/config***
 
 ```
 gettextCatalog.currentLanguage = 'es';
@@ -147,4 +147,4 @@ Contributions and suggestions are welcomed at the [OWS Explorer GitHub repositor
 
 Code released under [the MIT license](https://github.com/owstack/ows-explorer/blob/master/LICENSE).
 
-Copyright 2017 Open Wallet Stack. Bcccore is a trademark maintained by Open Wallet Stack.
+Copyright 2017 Open Wallet Stack.
