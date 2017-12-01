@@ -72,9 +72,7 @@ angular.module('owsExplorerApp.controllers').controller('SettingsController', fu
       setLanguage($scope.config.language);
     }
 
-    if ($scope.config.preferredNodeName != oldConfig.preferredNodeName) {
-      NodeService.setNode($scope.config.preferredNodeName);
-    }
+    NodeService.setNode($scope.config.preferredNodeName);
   };
 
   // Come back to update config and UI if fiat currency is selected; setting of the currency.fiatRateProvider is async.
