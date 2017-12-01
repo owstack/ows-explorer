@@ -29,10 +29,10 @@ Open a web browser to `http://localhost:3001/explorer/`
 
 ## Development
 
-To build OWS Explorer locally:
+To brand and build OWS Explorer locally:
 
 ```
-$ npm run build
+$ npm run apply:ows-explorer
 ```
 
 A watch task is also available:
