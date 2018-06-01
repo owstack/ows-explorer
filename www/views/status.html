@@ -31,7 +31,7 @@
           </tr>
           <tr>
             <td translate>Current Sync Status</td>
-            <td class="text-right"> 
+            <td class="text-right">
             <span  data-ng-show="!sync.error">{{sync.status}}</span>
             <span class="text-danger" data-ng-show="sync.error">
               <span  class="glyphicon glyphicon-warning-sign"></span>
@@ -88,7 +88,7 @@
     </div> <!-- END OF COL-8 -->
 
     <div class="col-xs-12 col-md-4 col-gray">
-      <h2 translate>{{$root.node.info.description.name}} Node Information</h2>
+      <h2 translate>{{$root.node.info.description.name}} {{$root.node.info.network}} Node Information</h2>
       <table class="table" data-ng-controller="StatusController">
         <thead  data-ng-include src="'views/includes/infoStatus.html'"></thead>
         <tbody>
@@ -142,4 +142,3 @@
     </div> <!-- END OF COL-GRAY -->
   </div>
 </section>
-

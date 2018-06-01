@@ -13,7 +13,7 @@
             <td class="text-right">
               <span>{{nodeWarning}}</span>
               <select class="settings-select" ng-model="config.preferredNodeName" ng-change="updateSettings()">
-                <option ng-repeat="n in nodes" value="{{n.info.description.name}}">{{n.info.description.name}}</option>
+                <option ng-repeat="n in nodes" value="{{n.info.description.name}}">{{n.info.description.name}} - {{n.info.network}}</option>
               </select>
             </td>
           </tr>

@@ -1,6 +1,6 @@
 <div class="container">
-  <div data-ng-controller="HeaderController">    
-    
+  <div data-ng-controller="HeaderController">
+
     <!-- full header -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"
@@ -15,17 +15,17 @@
         <!-- network status block -->
         <div class="status">
           <div class="pull-left">
-            <span class="t text-danger"  data-ng-show="sync.error" tooltip="{{sync.error}}" tooltip-placement="bottom"> 
+            <span class="t text-danger"  data-ng-show="sync.error" tooltip="{{sync.error}}" tooltip-placement="bottom">
               <span class="glyphicon glyphicon-warning-sign"></span>
-              ERROR 
+              ERROR
             </span>
-            <span class="t" tooltip="{{sync.syncedBlocks}} / {{sync.blockChainHeight}} synced. {{sync.skippedBlocks || 0}} skipped" tooltip-placement="bottom" data-ng-show="sync.status==='syncing'"> 
+            <span class="t" tooltip="{{sync.syncedBlocks}} / {{sync.blockChainHeight}} synced. {{sync.skippedBlocks || 0}} skipped" tooltip-placement="bottom" data-ng-show="sync.status==='syncing'">
               <span  class="glyphicon glyphicon-refresh icon-rotate"></span>
               {{sync.syncPercentage}}%
             </span>
             <span class="glyphicon glyphicon-ok" tooltip="Historic sync finished" tooltip-placement="bottom"
               data-ng-show="sync.status==='finished'"> </span>
-            {{node.info.description.name}}
+            {{node.info.description.name}} {{node.info.network}}
           </div>
           &nbsp;&middot;
           <span>
@@ -39,16 +39,16 @@
           <strong>{{$root.currency.fiatRateProvider}}</strong> &middot;
           {{$root.currency.rateStr}}
         </div>
-      
+
         <!-- mobile status block -->
         <div class="status-mobile">
           <div>
-            {{node.info.description.name}} &middot; 
-            <strong>{{'Conn'|translate}}</strong> {{info.connections}} &middot; 
+            {{node.info.description.name}} {{node.info.network}} &middot;
+            <strong>{{'Conn'|translate}}</strong> {{info.connections}} &middot;
             <strong>{{'Height'|translate}}</strong> {{totalBlocks || info.blocks}}
           </div>
           <div data-ng-show="$root.currency.fiatRateProvider">
-            <strong>{{$root.currency.fiatRateProvider}}</strong> &middot; 
+            <strong>{{$root.currency.fiatRateProvider}}</strong> &middot;
             {{$root.currency.rateStr}}
           </div>
         </div>
