@@ -22,6 +22,7 @@ angular.module('owsExplorerApp.services').factory('NodeService', function($rootS
       _nodes.push({
         url: nodeConfig.fullNodes[i].url || '',
         api: (nodeConfig.fullNodes[i].url || '') + (nodeConfig.fullNodes[i].apiPrefix || ''),
+        apiPrefix: nodeConfig.fullNodes[i].apiPrefix || '',
         info: {},
         status: 'pending'
       });

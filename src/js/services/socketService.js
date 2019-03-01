@@ -6,7 +6,7 @@ angular.module('owsExplorerApp.services').factory('SocketService', function($roo
   var scopedSocket;
 
   var _connect = function(node) {
-    console.log('connecting socket to' + JSON.sringify(node));
+    console.log('connecting socket to' + JSON.stringify(node));
     socket = io.connect(node.url, {
       'reconnect': true,
       'reconnection delay': 500,
@@ -28,12 +28,13 @@ angular.module('owsExplorerApp.services').factory('SocketService', function($roo
 
   $rootScope.$on('Local/NodeChange', function(event, data) {
     // Only re-establish socket if node has really changed.
-    if (data.oldNode != data.newNode) {
+    console.log('Socket service got node change', data.oldNode, data.newNode);
+    // if (data.oldNode != data.newNode) {
       _disconnect(function() {
         _connect(data.newNode);
         $rootScope.$emit('Local/SocketChange');
       });
-    }
+    // }
   });
 
   root.getSocket = function(scope) {
