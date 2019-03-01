@@ -3,29 +3,15 @@ OWS Explorer
 
 A blockchain explorer web application service for the following:
 
-- [Bch Node](https://github.com/owstack/bch-node) using the [Bch Explorer API](https://github.com/owstack/bch-explorer-api).
-- [Btc Node](https://github.com/owstack/btc-node) using the [Btc Explorer API](https://github.com/owstack/btc-explorer-api).
+- [OWS Explorer API](https://github.com/owstack/explorer-api)
 
 ## Quick Start
 
 Please see the guide at [TBS]() for information about getting a block explorer running. This is only the front-end component of the block explorer, and is packaged together with all of the necessary components in the following:
 
-- [Bch](https://github.com/owstack/bch)
-- [Btc](https://github.com/owstack/btc)
+- [Kubernetes](https://github.com/owstack/kubernetes)
 
-## Getting Started
-
-To manually install all of the necessary components, you can run these commands:
-
-```bash
-npm install -g @owstack/btc-node
-btcnode create mynode
-cd mynode
-btcnode install ows-explorer
-btcnode start
-```
-
-Open a web browser to `http://localhost:3001/explorer/`
+Open a web browser to `http://localhost:3000/`
 
 ## Development
 
@@ -43,69 +29,17 @@ $ npm run watch
 
 ## Configuring nodes
 
-By default, the `explorerConfig` in `package.json` is as follows.  The explorer will connect to its own host for blockchain data.
+By default, the `default` in `config/default.js` is as follows.  Environment variables must be set to configure.
 
-```json
-  "explorerConfig": {
-    "routePrefix": "explorer",
-    "fullNodes": [
-      {
-        "url": "",
-        "apiPrefix": "explorer-api"
-      }
+```
+{
+    routePrefix: process.env.PROXY_PATH || '',
+    fullNodes: [
+        {
+            url: process.env.EXPLORER_API_URL || 'https://dev.owstack.org',
+            apiPrefix: process.env.EXPLORER_API_PROXY_PATH || '/api/explorer/btc'
+        }
     ]
-  }
-```
-
-To change these settings configure your OWS node (e.g., see `~./btc-node.json` on your OWS node host).  The following will connect the explorer to a remote node for blockchain data.
-
-```json
-{
-  "network": "livenet",
-  "port": 3001,
-  "services": [
-    "ows-explorer",
-    "web"
-  ],
-	"servicesConfig": {
-    "ows-explorer": {
-      "routePrefix": "explorer",
-      "fullNodes": [
-        {
-          "url": "http://example.com:3001",
-          "apiPrefix": "explorer-api"
-        }
-      ]
-    }
-	}
-}
-```
-
-The explorer can connect to multiple nodes, each providing backend services for different blockchains.
-
-```json
-{
-  "network": "livenet",
-  "port": 3001,
-  "services": [
-    "ows-explorer",
-    "web"
-  ],
-	"servicesConfig": {
-    "ows-explorer": {
-      "routePrefix": "explorer",
-      "fullNodes": [
-        {
-          "url": "http://btc.example.com:3001",
-          "apiPrefix": "explorer-api"
-        },
-        {
-          "url": "http://bcc.example.com:3001",
-          "apiPrefix": "explorer-api"
-        }
-      ]
-    }
-	}
 }
 ```
 
