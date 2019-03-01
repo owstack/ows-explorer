@@ -6,7 +6,7 @@ angular.module('owsExplorerApp.services').factory('SocketService', function($roo
   var scopedSocket;
 
   var _connect = function(node) {
-    console.log('connecting socket to' + JSON.stringify(node));
+    console.log('connecting socket to' + JSON.stringify(node.api));
     socket = io.connect(node.url, {
       'reconnect': true,
       'reconnection delay': 500,
