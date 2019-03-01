@@ -49,7 +49,7 @@ angular.module('owsExplorerApp.services').factory('CurrencyService', function($r
         $rootScope.currency.value = res.data.rates[$rootScope.currency.code][provider].rate;
 
         $rootScope.currency.rateStr = '1 ' + $rootScope.currency.standardUnit.shortName + ' = ' +
-          $rootScope.currency.value.toFixed($rootScope.currency.decimals) + ' ' + $rootScope.currency.shortName;
+          $rootScope.currency.value.toFixed($rootScope.currency.precision.full.maxDecimals) + ' ' + $rootScope.currency.shortName;
       });
     }
   };
@@ -74,17 +74,17 @@ angular.module('owsExplorerApp.services').factory('CurrencyService', function($r
     }
 
     if (value === 0.00000000) {
-      return value.toFixed($rootScope.currency.decimals) + ' '+ $rootScope.currency.shortName;
+      return value.toFixed($rootScope.currency.precision.full.maxDecimals) + ' '+ $rootScope.currency.shortName;
     }
 
     var response;
     if ($rootScope.currency.kind == 'fiat') {
-      response = _roundFloat((value * $rootScope.currency.value), $rootScope.currency.decimals);
+      response = _roundFloat((value * $rootScope.currency.value), $rootScope.currency.precision.full.maxDecimals);
     } else {
-      response = _roundFloat((value * $rootScope.currency.standardUnit.value / $rootScope.currency.value), $rootScope.currency.decimals);
+      response = _roundFloat((value * $rootScope.currency.standardUnit.value / $rootScope.currency.value), $rootScope.currency.precision.full.maxDecimals);
     }
 
-    return response.toFixed($rootScope.currency.decimals) + ' ' + $rootScope.currency.shortName;
+    return response.toFixed($rootScope.currency.precision.full.maxDecimals) + ' ' + $rootScope.currency.shortName;
   };
 
   return root;
