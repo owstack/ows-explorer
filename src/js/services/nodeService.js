@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('owsExplorerApp.services').factory('NodeService', function($rootScope, $resource, $timeout, lodash, nodeConfig, ConfigService) {
-	var root = {};
+    var root = {};
 
   var CONNECTION_RETRIES = 1000000;
   var CONNECTION_RETRY_DELAY = 10000;
 
-	var _nodes = [];
+    var _nodes = [];
   var _currentNodeName = null;
   var _queue = [];
   var _waiting = false;
@@ -21,7 +21,7 @@ angular.module('owsExplorerApp.services').factory('NodeService', function($rootS
     for (var i = 0; i < nodeConfig.fullNodes.length; i++) {
       _nodes.push({
         url: nodeConfig.fullNodes[i].url || '',
-        api: (nodeConfig.fullNodes[i].url || '') + '/' + (nodeConfig.fullNodes[i].apiPrefix || ''),
+        api: (nodeConfig.fullNodes[i].url || '') + (nodeConfig.fullNodes[i].apiPrefix || ''),
         info: {},
         status: 'pending'
       });
@@ -124,7 +124,7 @@ angular.module('owsExplorerApp.services').factory('NodeService', function($rootS
   };
 
   root.getNodes = function() {
-  	return _nodes;
+      return _nodes;
   };
 
   root.getAvailableNodes = function() {
@@ -179,5 +179,5 @@ angular.module('owsExplorerApp.services').factory('NodeService', function($rootS
 
   _init();
 
-	return root;
+    return root;
 });

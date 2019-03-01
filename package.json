@@ -17,25 +17,18 @@
     "btccore",
     "front-end"
   ],
-  "owsNode": "ows-node",
-  "explorerConfig": {
-    "routePrefix": "explorer",
-    "fullNodes": [
-      {
-        "url": "",
-        "apiPrefix": "explorer-api"
-      }
-    ]
-  },
   "scripts": {
     "build": "bower install && grunt compile",
     "watch": "grunt",
     "apply:ows-explorer": "npm i fs-extra && cd app-template && node apply.js ows-explorer && npm run build"
   },
   "engines": {
-    "node": "6"
+    "node": "10"
   },
-  "dependencies": {},
+  "dependencies": {
+    "config": "^3.0.1",
+    "express": "^4.16.4"
+  },
   "devDependencies": {
     "bower": "~1.8.0",
     "grunt": "~0.4.2",
