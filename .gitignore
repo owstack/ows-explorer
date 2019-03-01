@@ -45,7 +45,8 @@ www/js/ows-node-config.js
 www/css/main.css
 
 www/img/r
-resources
+/resources
+
 
 README.html
 po/*
