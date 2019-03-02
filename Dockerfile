@@ -21,6 +21,14 @@ RUN npm install
 
 # copy other app files
 COPY . $APP_DIR
+RUN npm run bower-install
+RUN npm run grunt-compile
+
+USER root
+RUN npm run apply
+RUN chown -R ows:ows $APP_DIR
+
+USER ows
 
 ENV NODE_ENV=production
 
