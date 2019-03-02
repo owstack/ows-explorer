@@ -52,6 +52,7 @@ app-config
 resources/*
 app/assets/img
 app/assets/fonts
+app/assets/sound
 app/index.html
 
 # translation
