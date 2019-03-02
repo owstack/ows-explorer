@@ -29,35 +29,30 @@ module.exports = function(grunt) {
           }
         }
       },
-      vendors: {
+      components: {
         src: [
-          'src/js/ios-imagefile-megapixel/megapix-image.js',
+          'app/shared/3p/ios-imagefile-megapixel/megapix-image.js',
           'bower_components/qrcode-generator/js/qrcode.js',
-          'src/js/jsqrcode/grid.js',
-          'src/js/jsqrcode/version.js',
-          'src/js/jsqrcode/detector.js',
-          'src/js/jsqrcode/formatinf.js',
-          'src/js/jsqrcode/errorlevel.js',
-          'src/js/jsqrcode/bitmat.js',
-          'src/js/jsqrcode/datablock.js',
-          'src/js/jsqrcode/bmparser.js',
-          'src/js/jsqrcode/datamask.js',
-          'src/js/jsqrcode/rsdecoder.js',
-          'src/js/jsqrcode/gf256poly.js',
-          'src/js/jsqrcode/gf256.js',
-          'src/js/jsqrcode/decoder.js',
-          'src/js/jsqrcode/qrcode.js',
-          'src/js/jsqrcode/findpat.js',
-          'src/js/jsqrcode/alignpat.js',
-          'src/js/jsqrcode/databr.js',
+          'app/shared/3p/jsqrcode/grid.js',
+          'app/shared/3p/jsqrcode/version.js',
+          'app/shared/3p/jsqrcode/detector.js',
+          'app/shared/3p/jsqrcode/formatinf.js',
+          'app/shared/3p/jsqrcode/errorlevel.js',
+          'app/shared/3p/jsqrcode/bitmat.js',
+          'app/shared/3p/jsqrcode/datablock.js',
+          'app/shared/3p/jsqrcode/bmparser.js',
+          'app/shared/3p/jsqrcode/datamask.js',
+          'app/shared/3p/jsqrcode/rsdecoder.js',
+          'app/shared/3p/jsqrcode/gf256poly.js',
+          'app/shared/3p/jsqrcode/gf256.js',
+          'app/shared/3p/jsqrcode/decoder.js',
+          'app/shared/3p/jsqrcode/qrcode.js',
+          'app/shared/3p/jsqrcode/findpat.js',
+          'app/shared/3p/jsqrcode/alignpat.js',
+          'app/shared/3p/jsqrcode/databr.js',
           'bower_components/momentjs/min/moment.min.js',
           'bower_components/moment/lang/es.js',
-          'bower_components/zeroclipboard/ZeroClipboard.min.js'
-        ],
-        dest: 'www/js/vendors.js'
-      },
-      angular: {
-        src: [
+          'bower_components/zeroclipboard/ZeroClipboard.min.js',
           'bower_components/angular/angular.min.js',
           'bower_components/angular-resource/angular-resource.min.js',
           'bower_components/angular-route/angular-route.min.js',
@@ -68,34 +63,70 @@ module.exports = function(grunt) {
           'bower_components/ngprogress/build/ngProgress.min.js',
           'bower_components/angular-gettext/dist/angular-gettext.min.js',
           'bower_components/angular-moment/angular-moment.min.js',
-          'bower_components/ng-lodash/build/ng-lodash.min.js'
+          'bower_components/ng-lodash/build/ng-lodash.min.js',
         ],
-        dest: 'www/js/angularjs-all.js'
+        dest: 'www/lib/components.js'
       },
-      main: {
+      app: {
         src: [
-          'src/js/app.js',
-          'src/js/controllers/*.js',
-          'src/js/models/*.js',
-          'src/js/services/*.js',
-          'src/js/directives.js',
-          'src/js/filters.js',
-          'src/js/config.js',
-          'src/js/config-node.js',
-          'src/js/init.js',
-          'src/js/translations.js'
+          'app/app.js',
+          'app/components/**/*.js',
+          'app/model/**/*.js',
+          'app/services/**/*.js',
+          'app/shared/**/*.js',
+          'app/config.js',
+          'app/init.js',
+          'app/ows-node-config.js'
         ],
-        dest: 'www/js/main.js'
+        dest: 'www/js/app.js'
       },
       css: {
         src: [
           'bower_components/bootstrap/dist/css/bootstrap.min.css',
-          'src/css/**/*.css'
+          'app/shared/css/*.css',
+          'app/shared/css/**/*.css'
         ],
         dest: 'www/css/main.css'
       }
     },
     copy: {
+      app_root: {
+        expand: true,
+        flatten: false,
+        cwd: 'app/',
+        src: [
+          'index.html'
+        ],
+        dest: 'www/'
+      },
+      app_views: {
+        expand: true,
+        flatten: false,
+        cwd: 'app/components',
+        src: '**/*.html',
+        dest: 'www/views/'
+      },
+      app_shared: {
+        expand: true,
+        flatten: false,
+        cwd: 'app/shared',
+        src: '**/*.html',
+        dest: 'www/shared/'
+      },
+      app_fonts: {
+        expand: true,
+        flatten: false,
+        cwd: 'app/assets/fonts',
+        src: '**/*',
+        dest: 'www/fonts/'
+      },
+      app_imgs: {
+        expand: true,
+        flatten: false,
+        cwd: 'app/assets/img',
+        src: '**/*',
+        dest: 'www/img/'
+      },
       zeroclipboard: {
         expand: true,
         flatten: true,
@@ -108,17 +139,13 @@ module.exports = function(grunt) {
         banner: '/*! <%= pkg.name %> <%= pkg.version %> */\n',
         mangle: false
       },
-      vendors: {
-        src: 'www/js/vendors.js',
-        dest: 'www/js/vendors.min.js'
+      components: {
+        src: 'www/lib/components.js',
+        dest: 'www/lib/components.min.js'
       },
-      angular: {
-        src: 'www/js/angularjs-all.js',
-        dest: 'www/js/angularjs-all.min.js'
-      },
-      main: {
-        src: 'www/js/main.js',
-        dest: 'www/js/main.min.js'
+      app: {
+        src: 'www/js/app.js',
+        dest: 'www/js/app.min.js'
       }
     },
     cssmin: {
@@ -147,18 +174,18 @@ module.exports = function(grunt) {
     },
     watch: {
       main: {
-        files: ['src/js/**/*.js'],
-        tasks: ['concat:main', 'uglify:main'],
+        files: ['app/**/*.js'],
+        tasks: ['concat:app', 'uglify:app'],
       },
       css: {
-        files: ['src/css/**/*.css'],
+        files: ['app/css/**/*.css'],
         tasks: ['concat:css', 'cssmin'],
       },
     },
     nggettext_extract: {
       pot: {
         files: {
-          'po/template.pot': [
+          'i18n/po/template.pot': [
             'www/views/*.html',
             'www/views/**/*.html'
           ]
@@ -171,8 +198,8 @@ module.exports = function(grunt) {
           module: 'owsExplorerApp.translations'
         },
         files: {
-          'src/js/translations.js': [
-            'po/*.po'
+          'app/shared/translations/translations.js': [
+            'i18n/po/*.po'
           ]
         }
       },
@@ -190,6 +217,5 @@ module.exports = function(grunt) {
 
   //Compile task (concat + minify)
   grunt.registerTask('compile', ['nggettext_compile', 'concat', 'copy', 'uglify', 'cssmin']);
-
 
 };
