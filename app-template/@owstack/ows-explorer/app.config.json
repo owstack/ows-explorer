@@ -1,0 +1,13 @@
+{
+  "appTemplateName": "ows-explorer",
+  "packageName": "@owstack/ows-explorer",
+  "packageDescription": "OWS Explorer",
+  "author": "Open Wallet Stack",
+  "url": "https://openwalletstack.com",
+  "appDescription": "OWS Explorer",
+  "description": "A blockchain explorer",
+  "name": "ows explorer",
+  "nameNoSpace": "owsexplorer",
+  "nameCase": "OWS Explorer",
+  "nameCaseNoSpace": "OWSExplorer"
+}

@@ -37,17 +37,24 @@ db/blocks
 db/testnet/blocks/*
 db/testnet/blocks
 
-www/js/angularjs-all.js
-www/js/main.js
-www/js/vendors.js
-www/js/ows-node-config.js
-
-www/css/main.css
-
-www/img/r
-/resources
-
-
 README.html
-po/*
-!po/*.po
+
+# www
+# All img's generated from resources.sketch
+# All content copied into place by grunt.
+www/*
+
+# templates
+.ows-dist
+app-config
+
+# Generated resources and assets
+resources/*
+app/assets/img
+app/assets/fonts
+app/index.html
+
+# translation
+i18n/po/*.mo
+i18n/crowdin_api_key.txt
+app/shared/translations

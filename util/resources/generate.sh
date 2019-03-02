@@ -37,11 +37,20 @@ echo "Exporting all assets from $TEMPLATE_PATH/resources.sketch"
 # remove existing resources
 rm -fr $RESOURCES_PATH
 
-# sketchtool is installed by install.sh
-sketchtool export layers $TEMPLATE_PATH/resources.sketch --output=$TEMPLATE_PATH/resources
+if [ -f /Applications/Sketch.app/Contents/Resources/sketchtool/bin/sketchtool ]; then
 
-postprocess $TEMPLATE_PATH/resources
+  # export all slices marked for export to the proper directory
+  echo "Exporting all assets from $TEMPLATE_PATH/resources.sketch"
+
+  # Installed with sketchtool: https://developer.sketchapp.com/guides/sketchtool/
+  /Applications/Sketch.app/Contents/Resources/sketchtool/bin/sketchtool export layers $TEMPLATE_PATH/resources.sketch --output=$TEMPLATE_PATH/resources
+
+  postprocess $TEMPLATE_PATH/resources
+
+else
+  echo >&2 "Sketchtool is not installed, using pre-built resources from $TEMPLATE_PATH"
+fi
 
 echo "Publishing resources to $RESOURCES_PATH"
-mkdir -p $RESOURCES_ROOT
-mv $TEMPLATE_PATH/resources $RESOURCES_PATH
+mkdir -p $RESOURCES_PATH
+cp -R $TEMPLATE_PATH/resources/* $RESOURCES_PATH

@@ -18,7 +18,7 @@ Open a web browser to `http://localhost:3000/`
 To brand and build OWS Explorer locally:
 
 ```
-$ npm run apply:ows-explorer
+$ npm run apply
 ```
 
 A watch task is also available:
@@ -81,4 +81,4 @@ Contributions and suggestions are welcomed at the [OWS Explorer GitHub repositor
 
 Code released under [the MIT license](https://github.com/owstack/ows-explorer/blob/master/LICENSE).
 
-Copyright 2017 Open Wallet Stack.
+Copyright 2019 Open Wallet Stack.
