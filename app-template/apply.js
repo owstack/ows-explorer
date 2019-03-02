@@ -43,7 +43,7 @@ console.log('Applying ' + config.nameCase + ' template');
 
 // Generate image resources from sketch
 console.log('Creating resources for ' + config.nameCase);
-execSync('sh ./generate.sh ' + configDir, { cwd: '../util/resources', stdio: [0,1,2] });
+execSync('bash ./generate.sh ' + configDir, { cwd: '../util/resources', stdio: [0,1,2] });
 console.log('Done creating resources');
 
 // Replace key-value strings in template files and add installable plugins to package.json
