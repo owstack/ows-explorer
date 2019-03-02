@@ -1,2 +1,62 @@
 .git
+# from https://github.com/github/gitignore/blob/master/Node.gitignore
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+*.swp
+tags
+pids
+logs
+results
+build
+
+bower_components
 node_modules
+
+# extras
+*.swp
+*.swo
+*~
+.project
+peerdb.json
+
+npm-debug.log
+.nodemonignore
+
+.DS_Store
+db/txs/*
+db/txs
+db/testnet/txs/*
+db/testnet/txs
+db/blocks/*
+db/blocks
+db/testnet/blocks/*
+db/testnet/blocks
+
+README.html
+
+# www
+# All img's generated from resources.sketch
+# All content copied into place by grunt.
+www/*
+
+# templates
+.ows-dist
+app-config
+
+# Generated resources and assets
+resources/*
+app/assets/img
+app/assets/fonts
+app/assets/sound
+app/index.html
+
+# translation
+i18n/po/*.mo
+i18n/crowdin_api_key.txt
+app/shared/translations
