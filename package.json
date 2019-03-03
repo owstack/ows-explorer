@@ -1,7 +1,7 @@
 {
   "name": "@owstack/ows-explorer",
   "description": "An open source frontend for the Explorer API. The Explorer API provides you with a simple way to query and broadcast data on blockchain networks.",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "repository": "git://github.com/owstack/ows-explorer.git",
   "bugs": {
     "url": "https://github.com/owstack/ows-explorer/issues"
