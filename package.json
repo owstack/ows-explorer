@@ -44,7 +44,7 @@
     "bower-install": "bower install",
     "grunt-compile": "grunt compile",
     "build": "bower install && grunt compile",
-    "apply": "npm i fs-extra && cd app-template && node apply.js $(cat ../.ows-dist)",
+    "apply": "cd app-template && node apply.js $(cat ../.ows-dist)",
     "set-dist": "echo $1 > ./.ows-dist",
     "which-dist": "printf 'Distribution set for: ' && cat ./.ows-dist",
     "watch": "grunt"
